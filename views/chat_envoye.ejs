@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Collaboro | Boite d'envoi</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/assets/js/navbar.js"></script>
+</head>
+
+<body>
+  <div class="container-scroller  ">
+    <!--navbar start-->
+    <nav class="navbar  fixed-top navbar-light shadow-sm  d-flex  align-items-center ">
+      <a class="navbar-brand " href="/dashboard">
+        <img src="/assets/img/logo.png" class="d-inline-block align-top"> </a>
+      <ul class="nav justify-content-end ">
+        <li class="nav-item navbar-item">
+          <a class="nav-link count-indicator " href="/chat">
+            <i class="bi bi-envelope-fill mr-5 "></i>
+            <span class="count1"></span>
+          </a>
+        </li>
+        <li class="nav-item navbar-item">
+          <a class="nav-link count-indicator " href="/notification">
+            <i class="bi bi-bell-fill mr-4 "></i>
+            <span class="count"></span>
+          </a>
+        </li>
+        <li class="nav-item  mr-5 navbar-item">
+          <a class="nav-link profile-photo " href="/EditMyProfile/<%= data._id%>"><img src="<%=data.photo%>">
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!--navbar end-->
+    <div class="container-fluid page-body-wrapper" id="chat-container">
+      <!--sidebar start-->
+      <nav class="sidebar shadow flex-row align-items-start mx-0 px-0  " id="sidebar">
+        <ul class="nav" id="sidebar">
+          <li class="nav-item nav-link">
+            <button onclick="toggleNavbar()" class="btn btn-lg  " id="btnToggler"><i
+                class="bi bi-arrow-return-left"></i></button>
+          </li>
+          <li class="nav-item  ">
+            <a class="nav-link" href="/dashboard">
+              <i class="bi bi-grid"></i>
+              <span class="menu-title mx-2">Acceuil</span>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="/projets">
+              <i class="bi bi-code-square"></i>
+              <span class="menu-title mx-2 ">Projets</span>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="/sprints">
+              <i class="bi bi-code-square"></i>
+              <span class="menu-title mx-2 ">Sprints</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/taches">
+              <i class="bi bi-list-task"></i>
+              <span class="menu-title mx-2">Tâches</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/meeting">
+              <i class="bi bi-camera-video"></i>
+              <span class="menu-title mx-2 ">Meeting</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" data-toggle="collapse" href="/chat">
+              <i class="bi bi-chat-left"></i>
+              <span class="menu-title mx-2">Chat</span>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="/notification">
+              <i class="bi bi-bell"></i>
+              <span class="menu-title mx-2">Notification</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/EditMyProfile">
+              <i class="bi bi-people"></i>
+              <span class="menu-title mx-2">Profil</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/documentation">
+              <i class="bi bi-book"></i>
+              <span class="menu-title mx-2">Documentation</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/logout">
+              <i class="bi bi-box-arrow-left"></i>
+              <span class="menu-title mx-2">Déconnexion</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <nav class="mobile-sidebar shadow  flex-row align-items-start mx-0 px-0    " id="mobile-sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <button onclick="toggleNavbar()" class="btn btn-lg " id="btnToggler"><i
+                class="bi bi-arrow-return-right"></i></button>
+          </li>
+          <li class="nav-item  ">
+            <a class="nav-link" href="/dashboard">
+              <i class="bi bi-grid"></i>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="/projets">
+              <i class="bi bi-code-square"></i>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="/sprints">
+              <i class="bi bi-arrow-repeat"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/taches">
+              <i class="bi bi-list-task"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/meeting">
+              <i class="bi bi-camera-video"></i>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" data-toggle="collapse" href="/chat">
+              <i class="bi bi-chat-left"></i>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="/notification">
+              <i class="bi bi-bell"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/EditMyProfile">
+              <i class="bi bi-people"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/documentation">
+              <i class="bi bi-book"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/logout">
+              <i class="bi bi-box-arrow-left"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!--sidebar end-->
+      <!--sidebar end-->
+      <div class=" container-fluid main-panel" id="main-panel-home">
+        <div class="content-wrapper " id="main-panel-wrapper">
+          <!--First row start-->
+          <div class="row">
+            <div class="col d-flex justify-content-between" >
+              <p class="h4 PageTitle">Rapport Quotidien</p>
+              <button class="btn btn-primary" onclick="showModal(event)">Nouveau  inMail <i class="bi bi-envelope-plus"></i></button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col m-1 p-2 mt-2 projectInfosContainer d-flex flex-column justify-content-around">
+            <p class="h5 text-muted"><span class=" h1 PageTitle" style="color:#FF8368"><%=stats[0]%></span> Nouveaux InMails </p>
+            </div>
+            <div class="col m-1 p-2 mt-2 projectInfosContainer d-flex flex-column justify-content-around">
+              <p class="h5 text-muted"><span class=" h1 PageTitle" style="color:#8A81B5"><%=stats[1]%></span> InMails  Envoyés </p>
+              </div>
+              <div class="col m-1 p-2 mt-2 projectInfosContainer d-flex flex-column justify-content-around">
+                <p class="h5 text-muted"><span class=" h1 PageTitle" style="color:#6ABAA4"><%=stats[2]%></span>  InMails  Lu </p>
+                </div>
+          </div>
+          <div class="row mt-2 p-0">
+            <div class="col  h-100 projectInfosContainer  m-0 p-0">
+              <ul class="nav m-0 p-0 categoriesContainer">
+                <li class="nav-item  col">
+                  <a class="nav-link " data-toggle="collapse" href="/chat"><i class="bi bi-inbox h5 mr-2"></i>Boite de réception </a>
+                </li>
+                <li class="nav-item active col">
+                  <a class="nav-link" data-toggle="collapse" href="/sent"><i class="bi bi-send h5 mr-2"></i>inmails envoyés</a>
+                </li>
+
+                <li class="nav-item col">
+                  <a class="nav-link" data-toggle="collapse" href="/corbeille"><i class="bi bi-trash h5 mr-2"></i>corbeille</a>
+                </li>    
+              </ul>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4 col-sm-12 mx-1 projectInfosContainer p-1" style="height: fit-content;">
+              <%
+              if(inmails.length>0)
+              {
+              for(var i=0;i<inmails.length;i++)
+              {%>
+                <div class="col m-1 d-flex">
+                  <div class="col-auto notificationImageContainer d-flex justify-content-center align-items-center h4"><i class="bi bi-envelope text-light"></i></div>
+                  <div class="col d-flex justify-content-between">
+                     <div class="inmail" >
+                      <a type="button" href="#" onclick="showEmail('<%=inmails[i]._id%>','<%=inmails[i].identifiantEmetteur%>','<%=inmails[i].objet%>','<%=inmails[i].contenu%>','<%=inmails[i].dateEnvoi%>')" class="showEmailLink" >
+                       <p class="text-dark font-weight-bold m-0" ><%=inmails[i].identifiantEmetteur%></p>
+                       <p class="text-dark m-0"><%=inmails[i].contenu.substr(0,40)%>...</p></a>
+                      </div>
+                  </div> 
+                </div>
+              <%}}
+              else
+              {%>
+               <p class="h6 p-1 text-secondary"> Votre boîte d'envoie est vide !</p>
+              <%}
+              %>
+
+            </div>
+            <div class="col projectInfosContainer showEmailContainer">
+              <div class="row emailDetails p-2 d-none">
+                <div class="col-12 p-2 d-flex">
+                  <button type="button" class="btn btn-outline-danger  mx-1 deleteEmail" onclick="deleteEmail1(event)">Supprimer pour vous<i class="bi bi-trash ml-2"></i></button>
+                  <button type="button" class="btn btn-outline-info  mx-1 replyEmail" onclick="replyEmail(event)">Répondre<i class="bi bi-reply-all ml-2"></i></button>
+                  <button type="button" class="btn btn-outline-secondary  mx-1 transferEmail" onclick="transferEmail(event)">Transférer<i class="bi bi-reply ml-2"></i></button>
+                </div>
+                  <div class="row">
+                    <div class="col">
+                      <p class="font-weight-bold">De la part de <span class="PageTitle h6" id="email">emailnhhjezbhed</span>,</p>
+                      <p class="font-weight-bold">Concernant <span class="PageTitle h6" id="sujet">Sujet</span>,</p>
+                      <p class="font-weight-bold">Corps de message </p>
+                      <p id="message">Corps de message </p>
+                      <p class="font-weight-bold">Cordialement, <span class="PageTitle h6" id="date">emailnhhjezbhed</span>,</p>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+            <!--first row end -->
+          </div>
+          <div class="modal fade" id="reg-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <div class="row justify-content-center">
+                    <div class="d-flex justify-content-center notificationImageContainer align-items-center h4"><i class="bi bi-envelope text-light"></i></div>
+                  </div>
+                  <div class="row">
+                    <div class="col ">De  <input type="text" class="form-control" readonly value="<%=data.email%>"></div>
+                  </div>
+                  <div class="row mt-2">
+                    <div class="col ">Destinataire  
+                      <select name="destinataire" id="destinataire" class="form-control">
+                        <option >Veuillez sélectionner le destinataire de votre nouvel inMail</option>
+                        <%for(var i=0;i<users.length;i++)
+                        {%>
+                          <option value="<%=users[i].email%>" id="<%=users[i].email%>"><%=users[i].prenom%> <%=users[i].nom%></option>
+                       <%}%>
+                        </select>
+                    </div>
+                  </div>
+                  <div class="row mt-2">
+                    <div class="col ">Objet <input type="text" id="objet" name="objet" class="form-control" placeholder="Veuillez préciser l'objet de votre inMail"></div>
+                  </div>
+                  <div class="row mt-2">
+                    <div class="col ">Message <textarea name="msg" id="msg" class="msgContent form-control" style="height:fit-content;" oninput="auto_grow(this)" placeholder="Veuillez préciser le contenu de votre message"></textarea></div>
+                  </div>
+                  <div class="row mt-2 justify-content-center">
+                    <button class="btn btn-primary" onclick="sendNewInMail()">Envoyer <i class="bi bi-send ml-2"></i></button>
+                  </div>
+                
+                </div>
+        
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+<script src="/assets/js/searchMessages.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+</html>

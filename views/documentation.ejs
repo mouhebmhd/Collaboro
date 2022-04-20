@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Collaboro | Documentation</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/assets/js/navbar.js"></script>
+</head>
+
+<body>
+  <div class="container-scroller  ">
+    <!--navbar start-->
+    <nav class="navbar  fixed-top navbar-light shadow-sm  d-flex  align-items-center ">
+      <a class="navbar-brand " href="/dashboard">
+        <img src="/assets/img/logo.png" class="d-inline-block align-top"> </a>
+      <ul class="nav justify-content-end ">
+        <li class="nav-item navbar-item">
+          <a class="nav-link count-indicator " href="/chat">
+            <i class="bi bi-envelope-fill mr-5 "></i>
+            <span class="count1"></span>
+          </a>
+        </li>
+        <li class="nav-item navbar-item">
+          <a class="nav-link count-indicator " href="/notification">
+            <i class="bi bi-bell-fill mr-4 "></i>
+            <span class="count"></span>
+          </a>
+        </li>
+        <li class="nav-item  mr-5 navbar-item">
+          <a class="nav-link profile-photo " href="/EditMyProfile/<%= data._id%>"><img src="<%=data.photo%>">
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!--navbar end-->
+    <div class="container-fluid page-body-wrapper" id="chat-container">
+      <!--sidebar start-->
+      <nav class="sidebar shadow flex-row align-items-start mx-0 px-0  " id="sidebar">
+        <ul class="nav" id="sidebar">
+          <li class="nav-item nav-link">
+            <button onclick="toggleNavbar()" class="btn btn-lg  " id="btnToggler"><i
+                class="bi bi-arrow-return-left"></i></button>
+          </li>
+          <li class="nav-item  ">
+            <a class="nav-link" href="/dashboard">
+              <i class="bi bi-grid"></i>
+              <span class="menu-title mx-2">Acceuil</span>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="/projets">
+              <i class="bi bi-code-square"></i>
+              <span class="menu-title mx-2 ">Projets</span>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="/sprints">
+              <i class="bi bi-code-square"></i>
+              <span class="menu-title mx-2 ">Sprints</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/taches">
+              <i class="bi bi-list-task"></i>
+              <span class="menu-title mx-2">Tâches</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/meeting">
+              <i class="bi bi-camera-video"></i>
+              <span class="menu-title mx-2 ">Meeting</span>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="/chat">
+              <i class="bi bi-chat-left"></i>
+              <span class="menu-title mx-2">Chat</span>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="/notification">
+              <i class="bi bi-bell"></i>
+              <span class="menu-title mx-2">Notification</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/EditMyProfile">
+              <i class="bi bi-people"></i>
+              <span class="menu-title mx-2">Profil</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" data-toggle="collapse" href="/documentation">
+              <i class="bi bi-book"></i>
+              <span class="menu-title mx-2">Documentation</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/logout">
+              <i class="bi bi-box-arrow-left"></i>
+              <span class="menu-title mx-2">Déconnexion</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <nav class="mobile-sidebar shadow  flex-row align-items-start mx-0 px-0    " id="mobile-sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <button onclick="toggleNavbar()" class="btn btn-lg " id="btnToggler"><i
+                class="bi bi-arrow-return-right"></i></button>
+          </li>
+          <li class="nav-item  ">
+            <a class="nav-link" href="/dashboard">
+              <i class="bi bi-grid"></i>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="/projets">
+              <i class="bi bi-code-square"></i>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="/sprints">
+              <i class="bi bi-arrow-repeat"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/taches">
+              <i class="bi bi-list-task"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/meeting">
+              <i class="bi bi-camera-video"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/chat">
+              <i class="bi bi-chat-left"></i>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="/notification">
+              <i class="bi bi-bell"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/EditMyProfile">
+              <i class="bi bi-people"></i>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" data-toggle="collapse" href="/documentation">
+              <i class="bi bi-book"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/logout">
+              <i class="bi bi-box-arrow-left"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!--sidebar end-->
+      <!--sidebar end-->
+      <div class=" container-fluid main-panel" id="main-panel-home">
+        <div class="content-wrapper " id="main-panel-wrapper">
+          <!--First row start-->
+          <div class="row">
+            <div class="col " >
+              <p class="h4 PageTitle">À propos</p>
+            </div>
+          </div>
+          <div class="row projectInfosContainer m-0 p-0">
+              <ul class="nav sidenavbar m-0 p-1 ">
+                <li class="aboutScrum mr-1">
+                    <button class="nav-link summaryTitle btn  btnView1 active" data-toggle="collapse"  onclick="switchView('legalMentions','useConditions',2)">
+                      <i class="bi bi-shield-check h5"></i>
+                      <span class="menu-title">Mentions légales</span>
+                    </button>
+                  </li>
+                  <li class="aboutScrum mr-1" >
+                    <button class="nav-link summaryTitle btn btnView2" data-toggle="collapse" onclick="switchView('useConditions','legalMentions',1)">
+                      <i class="bi bi-info-circle h5"></i>
+                      <span class="menu-title">Conditions d'utilisation</span>
+                    </button>
+                  </li>
+              </ul>
+           </div>
+         <div class="col projectInfosContainer mt-2 p-1 legalMentions" id="1">
+            <p class="h5 PageTitle">Mentions Légales</p>
+            <p class="textDesc">
+                    Ce projet est enregistré sous la licence CC-NC-BY fournie par Creative Commons.
+                        <h6 class="PageTitle">Creative Commons</h5>
+                        <p>
+                            Creative Commons Corporation ("Creative Commons") n'est pas un cabinet d'avocats et ne fournit pas de services ou de conseils juridiques.
+                            ne fournit pas de services ou de conseils juridiques. La distribution des
+                            La distribution des licences publiques Creative Commons ne crée pas de relation avocat-client ou autre relation. 
+                            Creative Commons met à disposition ses licences et les informations
+                            informations connexes sur une base "telle quelle".
+                            Creative Commons ne donne aucun garantie concernant ses licences, tout matériel sous conditions, ou toute information connexe. Creative Commons
+                            décline toute responsabilité pour les dommages résultant de leur utilisation dans la plus large mesure possible.
+                        </p>
+                        <h6 class="PageTitle">l'attribution BY</h6>
+                        <p>L'attribution , dans le droit d'auteur, est la reconnaissance en tant que crédit au titulaire du droit d'auteur ou à l'auteur d'une œuvre. Si une œuvre est protégée par le droit d'auteur, il existe une longue tradition selon laquelle l'auteur exige une attribution tout en citant directement des parties de l'œuvre créées par cet auteur.
+                            Un auteur peut exiger formellement l'attribution requise via une licence , empêchant légalement les autres de prétendre avoir écrit l'œuvre et permettant à un détenteur de droits d'auteur de conserver les avantages de réputation de l'avoir écrit.Dans les cas où le titulaire du droit d'auteur est l'auteur lui-même, ce comportement est souvent moralisé comme un signe de décence et de respect pour reconnaître le créateur en lui donnant crédit pour l'œuvre.
+                            Cela dit, une œuvre du domaine public , qui n'est pas couverte par le droit d'auteur, n'a pas cette exigence d'attribution dans la plupart des régions du monde. C'est le facteur de distinction entre le plagiat , qui n'est pas un crime, et la violation du droit d'auteur , qui peut être une cause d'action en justice de la part de l'auteur.</p>
+                        </p>
+                        <h6 class="PageTitle">Pas d'utilisation commerciale</h6>
+                        <p>Le titulaire de Collaboro peut autoriser tous les types d’utilisation ou au contraire restreindre aux utilisations non commerciales (les utilisations commerciales restant soumises à son autorisation).
+                        </p>
+        </div>
+        <div class="col projectInfosContainer mt-2 p-1 useConditions d-none" id="2">
+            <p class="h5 PageTitle">Conditions d'utilisation</p>
+            <p class="textDesc">
+                Ce site Web utilise des cookies.
+                Les cookies nous permettent de personnaliser le contenu et les annonces, d'offrir des fonctionnalités relatives aux médias sociaux et d'analyser notre trafic.
+                Retrouvez notre politique de protection des données personnelles en cliquant ici.
+                Les cookies sont des petits fichiers textes qui peuvent être utilisés par les sites Web pour rendre l'expérience utilisateur plus efficace.
+                La loi stipule que nous ne pouvons stocker des cookies sur votre appareil que s’ils sont strictement nécessaires au fonctionnement de ce site. Pour tous les autres types de cookies, nous avons besoin de votre permission.
+                Ce site utilise différents types de cookies. Certains cookies sont placés par les services tiers qui apparaissent sur nos pages.
+                À tout moment, vous pouvez modifier ou retirer votre consentement dès la Déclaration relative aux cookies sur notre site Web.
+             </p>
+        </div>
+
+            <!--first row end -->
+          </div>
+      
+        </div>
+      </div>
+    </div>
+</body>
+<script src="/assets/js/aboutSection.js"></script>
+</html>

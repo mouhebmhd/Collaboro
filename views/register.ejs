@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Collaboro | Créer un compte</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="/assets/js/registration.js"></script>
+</head>
+<body>
+  <div class="container-scroller  ">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper  bg-light  py-4 m-0">
+        <div class="row  py-3 h-100 ">
+          <div class="col-4 shadow-lg p-3 login-div-container">
+            <div class="row  m-0 p-0">
+                <div class="col login-image-container d-flex justify-content-center "><img src="/assets/img/goback.svg" class="img-fluid" alt=""></div>
+            </div>
+            <div class="row m-0 p-0" >
+                <div class="col-12 login-text-container d-flex justify-content-center flex-column align-items-center">
+                    <p class="h4">Vous avez déjà un compte ?</p>
+                    <p class="h5 font-weight-light text-muted" >Nous sommes heureux de vous retrouver </p>
+                    <a class="btn btn-block mt-2 h5" href="/login" id="GoBackToLogin">Se Connecter</a>
+                </div>
+                
+            </div>
+          </div>
+            <div class="col ml-5 grid-margin stretch-card ml-2 register-form-container  ">
+                <div class="card personal-info-form">
+                  <div class="card-body">
+                    <h4 class="card-title text-center">Nouveau Compte </h4>
+                    <p class="text-muted h6 text-center">Créer votre compte gratuitement !</p>
+
+
+                    <fieldset >
+                      <form class="form py-3 ml-5" name="registrationForm"  method="post"  action="/api/register/utilisateurs"   onsubmit="return validateRegistrationForm()">
+                        <div class="form-container" id="personal-informations-form">
+                          <legend class="h6 form-title">Informations Personels </legend>
+                          <div class="form-group row ">
+                            <div class="col-sm-12 text-center ">
+                              Photo de profil
+                            </div>
+                            <div class=" col-sm-12 d-flex justify-content-center">
+                              <div class=" photoBackground  d-flex flex-column justify-content-center align-items-center mt-2">
+                                <label for="photo" data-bs-toggle="modal" data-bs-target="#reg-modal" ><i id="camerIcon" class="bi bi-camera-fill display-4 text-light"></i></label>
+                              </div>
+                            </div>
+
+                          </div>
+                          <div class="form-group row">
+                            <div class="modal fade" id="reg-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-body  ">
+                                      <div class="row p-0 m-0 avatarsContainer ">
+                                        <div class="col-3  avatar1 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar"  id="avatar1" value="/assets/uploads/avatar1.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                        <div class="col-3  avatar2 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar" id="avatar2" value="/assets/uploads/avatar2.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                        <div class="col-3  avatar3 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar" id="avatar3" value="/assets/uploads/avatar3.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                        <div class="col-3  avatar4 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar" id="avatar4" value="/assets/uploads/avatar4.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                        <div class="col-3  avatar5 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar" id="avatar5" value="/assets/uploads/avatar5.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                        <div class="col-3  avatar6 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar" id="avatar6" value="/assets/uploads/avatar6.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                        <div class="col-3  avatar7 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar" id="avatar7" value="/assets/uploads/avatar7.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                        <div class="col-3  avatar8 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar" id="avatar8" value="/assets/uploads/avatar8.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                        <div class="col-3  avatar9 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar" id="avatar9" value="/assets/uploads/avatar9.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                        <div class="col-3  avatar10 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar" id="avatar10" value="/assets/uploads/avatar10.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                        <div class="col-3  avatar11 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar" id="avatar11" value="/assets/uploads/avatar11.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                        <div class="col-3  avatar12 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar" id="avatar12" value="/assets/uploads/avatar12.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                        <div class="col-3  avatar13 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar" id="avatar13" value="/assets/uploads/avatar13.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                        <div class="col-3  avatar14 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar" id="avatar14" value="/assets/uploads/avatar14.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                        <div class="col-3  avatar15 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar" id="avatar15" value="/assets/uploads/avatar15.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                        <div class="col-3  avatar16 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar" id="avatar16" value="/assets/uploads/avatar16.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                        <div class="col-3  avatar17 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar" id="avatar17" value="/assets/uploads/avatar17.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                        <div class="col-3  avatar18 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar" id="avatar18" value="/assets/uploads/avatar18.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                        <div class="col-3  avatar19 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar" id="avatar19" value="/assets/uploads/avatar19.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                        <div class="col-3  avatar20 d-flex flex-column align-items-center justify-content-center" onclick="identifyPhoto(event)">
+                                          <input class="form-check-input p-0 d-none radioChecker" type="radio" name="avatar" id="avatar20" value="/assets/uploads/avatar20.png">
+                                          <div class="checkStatus d-none "><i class="bi bi-check2  display-4 mr-5 p-1"></i></div>
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" onclick="validerPhoto()">Valider</button>
+                                    <button type="button"  id="closeButton" class="btn btn-secondary d-none" data-bs-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <div class="form-group row ">
+                          <div class="col-sm-12 ">
+                            <label for="name">Nom</label>
+                          </div>
+                          <div class="col-sm-12 m-auto">
+                            <input type="text" class="form-control " id="name" name="name" placeholder="Votre Nom">
+                            <div id="validationFeedback" class="invalid-feedback">
+                              Le nom saisie doit être non vide et composé uniquement par des lettres.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row ">
+                          <div class="col-sm-12 ">
+                            <label for="first_name">Prénom</label>
+                          </div>
+                          <div class="col-sm-12 m-auto">
+                            <input type="text" class="form-control " id="first_name" name="first_name" placeholder="Votre Prénom">
+                            <div id="validationFeedback" class="invalid-feedback">
+                              Le prénom saisie doit être non vide et composé uniquement par des lettres.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row ">
+                          <div class="col-sm-12 ">
+                            <label for="gender">Genre</label>
+                          </div>
+                          <div class="col-12 d-flex justify-content-around">
+                            <div class="form-check form-check-inline  ">
+                              <input class="form-check-input" type="radio" name="gender" id="genderMale" value="Homme">
+                              <label class="form-check-label" for="genderMale">Homme</label>
+                            </div>
+                            <div class="form-check form-check-inline ">
+                              <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="Femme">
+                              <label class="form-check-label" for="genderFemale">Femme</label>
+                            </div>
+                            <div class="form-check form-check-inline ">
+                              <input class="form-check-input" type="radio" name="gender" id="genderOther" value="Autre">
+                              <label class="form-check-label" for="genderOther">Autre</label>
+                            </div>
+                            <div id="validationFeedback" class="invalid-feedback">
+                              Veuillez sélectionner votre genre.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row ">
+                          <div class="col-sm-12 ">
+                            <label for="country">Adresse</label>
+                          </div>
+                          <div class="col-sm-4 m-auto">
+                            <input type="text" class="form-control " id="country" name="country" placeholder="Pays de résidence">
+                            <div id="validationFeedback" class="invalid-feedback">
+                              Le nom de pays  doit être non vide et composé uniquement par des lettres.
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-auto">
+                            <input type="text" class="form-control " id="city" name="city" placeholder="Ville ">
+                            <div id="validationFeedback" class="invalid-feedback">
+                              Le nom de ville  doit être composé uniquement par des lettres.
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-auto">
+                            <input type="text" class="form-control " id="postale_code" name="postale_code" placeholder="Code Postale">
+                            <div id="validationFeedback" class="invalid-feedback">
+                              Le code postale doit être non vide et composé uniquement par des lettres Aa-zZ et des chiffres 0-9
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row ">
+                          <div class="col-sm-12 ">
+                            <label for="day">Date de naissance</label>
+                          </div>
+                          <div class="col-sm-4 m-auto">
+                            <input type="text" class="form-control " id="day" name="day" placeholder="Jour" min=01 max=31>
+                            <div id="validationFeedback" class="invalid-feedback">
+                              Le jour saisie est invalide
+                            </div>
+                            
+                          </div>
+                          <div class="col-sm-4 m-auto">
+                            <select class="custom-select" id="month" name="month">
+                              <option value"invalid_choice">Mois de naissance</option>
+                              <option value"Janvier">Janvier</option>
+                              <option value"Février">Février</option>
+                              <option value"Mars"> Mars</option>
+                              <option value"Avril">Avril</option>
+                              <option value"Mai">Mai</option>
+                              <option value"Juin">Juin</option>
+                              <option value"Juillet"> Juillet</option>
+                              <option value"Août">Août</option>
+                              <option value"Septembre">Septembre</option>
+                              <option value"Octobre">Octobre</option>
+                              <option value"Novembre">Novembre</option>
+                              <option value"Décembre">Décembre</option>
+                            </select>
+                            <div id="validationFeedback" class="invalid-feedback">
+                              Veuillez sélectionner votre mois de naissance
+                            </div>                          
+                          </div>
+                          <div class="col-sm-4 m-auto">
+                            <input type="text" class="form-control " id="year" name="year" placeholder="Année">
+                            <div id="validationFeedback" class="invalid-feedback">
+                             Veuillez sélectionner vote année de naissance
+                            </div>
+                          </div>
+                        </div>           
+                        <div class="row d-flex justify-content-end">
+                          <div class="col-4 mt-2 ">
+                              <button  type="button" class="btn " id="next" onclick="nextPrev('connect-informations-form')">Étape suivante <i class="bi bi-arrow-right"></i></button>
+                            </div>
+                        </div>                 
+                        
+                        
+                      </div>
+                      <div class="form-container" id="connect-informations-form">
+                        <legend class="h6 form-title">Données de Connexion </legend>
+                        <div class="form-group row ">
+                          <div class="col-sm-12 ">
+                            <label for="email">Email</label>
+                          </div>
+                          <div class="col-sm-12 m-auto">
+                            <input type="text" class="form-control " id="email" name="email" placeholder="Votre Email">
+                            <div id="validationFeedback" class="invalid-feedback">
+                              Votre Email doit  être de la forme username@service.domaine avec :<br>
+                              username composé uniquement par des lettres,des chiffres et "_"<br>
+                              service et domaine doivent être purement alphabétique
+                              domaine contient 2 ou 3 caractères.
+
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row ">
+                          <div class="col-sm-12 ">
+                            <label for="password">Mot de passe</label>
+                          </div>
+                          <div class="col-sm-12 m-auto">
+                            <input type="password" class="form-control " id="password" name="password" placeholder="Votre mot de passe ">
+                            <div id="validationFeedback" class="invalid-feedback">
+                              Votre mot de passe doit contenir au moins 8 caractères
+                             </div>
+                          </div>
+                        </div>
+                        <div class="form-group row ">
+                          <div class="col-sm-12 ">
+                            <label for="country">Confirmation de mot de passe </label>
+                          </div>
+                          <div class="col-sm-12 m-auto">
+                            <input type="password" class="form-control " id="repassword" name="repassword" placeholder="Retapez votre mot de passe ">
+                            <div id="validationFeedback" class="invalid-feedback">
+                              la Confirmation du mot de passe doit être identique à la première mot  de passe 
+                             </div>
+                          </div>
+                        </div>
+                        <div class="form-group row ">
+                          <div class="col-sm-12 ">
+                            <label for="phone">Numéro de téléphone</label>
+                          </div>
+                          <div class="col-sm-12 m-auto">
+                            <input type="text" class="form-control " id="phone" name="phone" placeholder="Votre numéro de téléphone  ">
+                            <div id="validationFeedback" class="invalid-feedback">
+                              le numéro de téléphone  doit être composé uniquement par des chiffres
+                            </div>
+                          </div>
+                        </div>
+                      
+                        
+                        <div class="row  d-flex justify-content-around">
+                                <button type="button" class="btn btn-outline-primary" id="prev" onclick="nextPrev('personal-informations-form')"><i class="bi bi-arrow-left mr-2"></i>Étape précédante</button>
+                                <button type="submit" class="btn " id="next2" >Confirmer <i class="bi bi-check2"></i></button>
+                        </div>
+
+                        
+                             
+                   
+                      </div>
+                      </form>
+                    </fieldset>
+                   
+                  </div>
+                </div>
+              </div>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+</html>

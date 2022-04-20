@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Collaboro | Dashboard</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body >
+  <div class="container-scroller  ">
+    <!--navbar start-->
+    <nav class="navbar  fixed-top navbar-light shadow-sm  d-flex  align-items-center ">
+      <a class="navbar-brand " href="/dashboard">
+        <img src="/assets/img/logo.png"  class="d-inline-block align-top"> </a>
+        <ul class="nav justify-content-end ">
+          <li class="nav-item navbar-item">
+            <a class="nav-link count-indicator " href="/chat">
+              <i class="bi bi-envelope-fill mr-5 "></i>
+              <span class="count1"></span>
+            </a>
+          </li>
+          <li class="nav-item navbar-item">
+            <a class="nav-link count-indicator " href="/notification">
+              <i class="bi bi-bell-fill mr-4 "></i>
+              <span class="count"></span>
+            </a>
+          </li>
+          <li class="nav-item  mr-5 navbar-item">
+            <a class="nav-link profile-photo " href="/EditMyProfile/<%= data._id%>"><img src="<%=data.photo%>" >
+            </a>
+          </li>
+  
+        
+        </ul>
+    </nav>    <!--navbar end-->
+    <div class="container-fluid page-body-wrapper">
+      <!--sidebar start-->
+      <nav class="sidebar shadow flex-row align-items-start mx-0 px-0  " id="sidebar">
+    <ul class="nav" id="sidebar">
+      <li class="nav-item nav-link">
+          <button onclick="toggleNavbar()" class="btn btn-lg  " id="btnToggler"><i class="bi bi-arrow-return-left"></i></button>
+      </li>
+      <li class="nav-item  active">
+        <a class="nav-link" href="/dashboard">
+          <i class="bi bi-grid"></i>
+          <span class="menu-title mx-2">Acceuil</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" data-toggle="collapse" href="/projets"  >
+          <i class="bi bi-code-square"></i>
+          <span class="menu-title mx-2 ">Projets</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" data-toggle="collapse" href="/sprints"  >
+          <i class="bi bi-code-square"></i>
+          <span class="menu-title mx-2 ">Sprints</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/taches" >
+          <i class="bi bi-list-task"></i>
+          <span class="menu-title mx-2">Tâches</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/meeting">
+          <i class="bi bi-camera-video"></i>
+          <span class="menu-title mx-2 ">Meeting</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/chat">
+          <i class="bi bi-chat-left"></i>
+          <span class="menu-title mx-2">Chat</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" data-toggle="collapse" href="/notification">
+          <i class="bi bi-bell"></i>
+          <span class="menu-title mx-2">Notification</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/EditMyProfile">
+          <i class="bi bi-people"></i>
+          <span class="menu-title mx-2">Profil</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/documentation">
+          <i class="bi bi-book"></i>
+          <span class="menu-title mx-2">Documentation</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/logout">
+          <i class="bi bi-box-arrow-left"></i>
+          <span class="menu-title mx-2">Déconnexion</span>
+        </a>
+      </li>
+    </ul>
+</nav>
+<nav class="mobile-sidebar shadow  flex-row align-items-start mx-0 px-0    " id="mobile-sidebar">
+    <ul class="nav" >
+      <li class="nav-item">
+        <button onclick="toggleNavbar()" class="btn btn-lg " id="btnToggler"><i class="bi bi-arrow-return-right"></i></button>
+      </li>
+      <li class="nav-item  active">
+        <a class="nav-link" href="/dashboard">
+          <i class="bi bi-grid"></i>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" data-toggle="collapse" href="/projets"  >
+          <i class="bi bi-code-square"></i>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" data-toggle="collapse" href="/sprints"  >
+          <i class="bi bi-arrow-repeat"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/taches" >
+          <i class="bi bi-list-task"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/meeting">
+          <i class="bi bi-camera-video"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/chat">
+          <i class="bi bi-chat-left"></i>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" data-toggle="collapse" href="/notification">
+          <i class="bi bi-bell"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/EditMyProfile">
+          <i class="bi bi-people"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/documentation">
+          <i class="bi bi-book"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/logout">
+          <i class="bi bi-box-arrow-left"></i>
+        </a>
+      </li>
+    </ul>
+</nav>        <!--sidebar end-->
+        <div class=" container-fluid main-panel" id=main-panel-home >
+          <div class="content-wrapper" id="main-panel-wrapper">
+         <!--First row start-->
+            <div class="row ">
+              <!--people card container  start-->
+              <div class=" col m-lg-0  ">
+                <!--people card start-->
+              
+                <div class="card  people-card ">
+                  <div class="card-people d-flex  flex-column pb-3 justify-content-between">
+                    <div class="cardUtilisateur   text-white font-weight-normal p-2 h3">Bonjour,<span class="username text-warning userID" id="<%=data._id%>" ><%= data.prenom %></span></div>
+                    <div class="weather-info text-right  pr-2 ">
+                        <div class="col">
+                          <h4 class="location text-light font-weight-normal"><%= data.ville %>,<%= data.pays %></h4>
+                        </div>
+                        <div class="col">
+                          <h2 class="mb-0 font-weight-normal text-warning"><span class="h3 font-weight-light"><%=weather.skytext%></span><br><%=weather.temperature%><sup>C</sup></h2>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              
+              <!--people card end -->
+            </div>
+            <!--people card container end -->
+            <!--infos card start-->
+                <div class="col-6 info-group-container ">
+                  <!--info group start-->
+                  <div class="row p-0 m-0 d-flex flex-column align-items-stretch">
+                    <div class="row">
+                    <!--date card start -->
+                    <div class="col-6 transparent ">
+                      <div class="card heure-card ">
+                        <div class="card-body d-flex flex-column align-items-between">
+                          <p class=" d-flex justify-content-between"><span>L'heure actuel</span><i class="bi bi-clock"></i></p>
+                          <p class="fs-30 "><span id="heure" class="text-dark font-weight-bold"></span></p>
+                        </div>
+                      </div>
+                    </div>
+                    <!--date card end-->
+                    <!--heure card start-->
+                    <div class="col-6 stretch-card">
+                      <div class="card date-card ">
+                        <div class="card-body d-flex flex-column align-items-between">
+                        <p class=" d-flex justify-content-between "><span>Date </span><i class="bi bi-calendar2-week"></i> </p>
+                          <p class="fs-30  text-dark"><span id="date"class=" font-weight-bold"></span></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <!--heure card end-->
+                    <!--taches card start-->
+                    <div class="col-6 stretch-card transparent">
+                    <div class="card taches-card">
+                      <div class="card-body d-flex flex-column align-items-between">
+                        <p class=" d-flex justify-content-between"><span>Tâches</span><i class="bi bi-check"></i> </p>
+                        <p class="fs-30  font-weight-bold "><%=tasks.response%></p>
+                      </div>
+                    </div>
+                  </div>
+                  <!--taches card end-->
+                  <!--projets card start-->
+                    <div class="col-6 stretch-card transparent">
+                      <div class="card card-light-danger projets-card">
+                        <div class="card-body d-flex flex-column align-items-between">
+                          <p class=" d-flex justify-content-between"><span> Projets</span><i class="bi bi-cast"></i></p>
+                          <p class="fs-30  font-weight-bold"><%let sum=parseInt(parseInt(stats.po)+parseInt(stats.sm)+parseInt(stats.dev))%><%=sum%></p>
+                        </div>
+                      </div>
+                    </div>
+                    <!--projets card end-->
+                  </div>
+                  </div>
+                  <!--info group end -->
+                </div>
+            <!--infos card end -->
+            </div>
+            <div class="row m-0 mt-2 justify-content-around">
+              <div class="col">
+                <div class="card heure-card ">
+                  <div class="card-body d-flex flex-column align-items-between">
+                   <p class="h6 descriptionContainer">Projets en tant que Product Owner</p>
+                   <p class="h6 valueContainer asPO"><%=stats.po%></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card heure-card ">
+                  <div class="card-body d-flex flex-column align-items-between">
+                   <p class="h6 descriptionContainer">Projets en tant que Scrum Master</p>
+                   <p class="h6 valueContainer asSM"><%=stats.sm%></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card heure-card ">
+                  <div class="card-body d-flex flex-column align-items-between">
+                   <p class="h6 descriptionContainer">Projets en tant que Développeur</p>
+                   <p class="h6 valueContainer asDEV"><%=stats.dev%></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card heure-card ">
+                  <div class="card-body d-flex flex-column align-items-between">
+                   <p class="h6 descriptionContainer">Projets en tant que Stakeholder</p>
+                   <p class="h6 valueContainer asSH"><%=stats.sh%></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12  mx-0  annual-stats">
+                <div class="card ">
+                  <div class="card-body ">
+                    <p class="card-title h4  PageTitle">Statistique mensuelle</p>
+                    <div class="d-flex flex-wrap justify-content-between mb-5">
+                      <div class="mr-5 mt-3">
+                        <p class="text-muted">Total</p>
+                        <h3 class=" fs-30 font-weight-medium info">166</h3>
+                      </div>
+                      <div class="mr-5 mt-3 ">
+                        <p class="text-muted">Maximum</p>
+                        <h3 class="fs-30 font-weight-medium info">35</h3>
+                      </div>
+                      <div class="mr-5 mt-3">
+                        <p class="text-muted">Minimum</p>
+                        <h3 class="fs-30 font-weight-medium info">18</h3>
+                      </div>
+                      <div class="mt-3">
+                        <p class="text-muted">Avg</p>
+                        <h3 class=" fs-30 font-weight-medium info">33.2%</h3>
+                      </div> 
+                    </div>
+                    <div class=" chart-container d-block ">
+                      <canvas id="myChart" height="300" ></canvas>
+                      <script src="/assets/js/annualChart.js"></script>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+          
+  </div>
+  </div>
+
+    <script src="/assets/js/date.js"></script>
+    <script src="assets/js/navbar.js" ></script>
+
+</body>
+</html>

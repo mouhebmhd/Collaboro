@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Collaboro | Créer un nouveau projet</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body >
+  <div class="container-scroller  ">
+    <!--navbar start-->
+    <nav class="navbar  fixed-top navbar-light shadow-sm  d-flex  align-items-center ">
+      <a class="navbar-brand " href="/index">
+        <img src="/assets/img/logo.png"  class="d-inline-block align-top"> </a>
+        <ul class="nav justify-content-end ">
+          <li class="nav-item navbar-item">
+            <a class="nav-link count-indicator " href="/chat">
+              <i class="bi bi-envelope-fill mr-5 "></i>
+              <span class="count1"></span>
+            </a>
+          </li>
+          <li class="nav-item navbar-item">
+            <a class="nav-link count-indicator " href="/notification">
+              <i class="bi bi-bell-fill mr-4 "></i>
+              <span class="count"></span>
+            </a>
+          </li>
+          <li class="nav-item  mr-5 navbar-item">
+            <a class="nav-link profile-photo " href="/EditMyProfile/<%= data._id%>"><img src="<%=data.photo%>" >
+            </a>
+          </li>
+
+        
+        </ul>
+    </nav>
+    <!--navbar end-->
+    <div class="container-fluid page-body-wrapper">
+      <!--sidebar start-->
+        <nav class="sidebar shadow flex-row align-items-start mx-0 px-0  " id="sidebar">
+            <ul class="nav" id="sidebar">
+              <li class="nav-item nav-link">
+                  <button onclick="toggleNavbar()" class="btn btn-lg  " id="btnToggler"><i class="bi bi-arrow-return-left"></i></button>
+              </li>
+              <li class="nav-item  ">
+                <a class="nav-link" href="/dashboard.html">
+                  <i class="bi bi-grid"></i>
+                  <span class="menu-title mx-2">Acceuil</span>
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" data-toggle="collapse" href="/projets"  >
+                  <i class="bi bi-code-square"></i>
+                  <span class="menu-title mx-2 ">Projets</span>
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" data-toggle="collapse" href="/sprints"  >
+                  <i class="bi bi-arrow-repeat"></i>
+                  <span class="menu-title mx-2 ">Sprints</span>
+                </a>
+              </li>
+            
+              <li class="nav-item ">
+                <a class="nav-link" data-toggle="collapse" href="/taches" >
+                  <i class="bi bi-list-task"></i>
+                  <span class="menu-title mx-2">Tâches</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="/meeting">
+                  <i class="bi bi-camera-video"></i>
+                  <span class="menu-title mx-2 ">Meeting</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="/chat">
+                  <i class="bi bi-chat-left"></i>
+                  <span class="menu-title mx-2">Chat</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="/chat">
+                  <i class="bi bi-bell"></i>
+                  <span class="menu-title mx-2">Notification</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="/EditMyProfile">
+                  <i class="bi bi-people"></i>
+                  <span class="menu-title mx-2">Profil</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="/documentation">
+                  <i class="bi bi-book"></i>
+                  <span class="menu-title mx-2">Documentation</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="/">
+                  <i class="bi bi-box-arrow-left"></i>
+                  <span class="menu-title mx-2">Déconnexion</span>
+                </a>
+              </li>
+            </ul>
+        </nav>
+        <nav class="mobile-sidebar shadow  flex-row align-items-start mx-0 px-0    " id="mobile-sidebar">
+          <ul class="nav" >
+            <li class="nav-item">
+              <button onclick="toggleNavbar()" class="btn btn-lg " id="btnToggler"><i class="bi bi-arrow-return-right"></i></button>
+            </li>
+            <li class="nav-item  ">
+              <a class="nav-link" href="/dashboard">
+                <i class="bi bi-grid"></i>
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" data-toggle="collapse" href="/projets"  >
+                <i class="bi bi-code-square"></i>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" data-toggle="collapse" href="/sprints"  >
+                <i class="bi bi-arrow-repeat"></i>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" data-toggle="collapse" href="/taches" >
+                <i class="bi bi-list-task"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="/meeting">
+                <i class="bi bi-camera-video"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="/chat">
+                <i class="bi bi-chat-left"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="/notification">
+                <i class="bi bi-bell"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="/EditMyProfile">
+                <i class="bi bi-people"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="/documentation">
+                <i class="bi bi-book"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="/logout">
+                <i class="bi bi-box-arrow-left"></i>
+              </a>
+            </li>
+          </ul>
+      </nav>
+        <!--sidebar end-->
+        <div class=" container-fluid main-panel" id=main-panel-home >
+          <div class="content-wrapper" id="main-panel-wrapper">
+            <!--First row start-->
+            <div class="row d-flex justify-content-between">
+                <div class="page-title"><h4>Nouveau projet</h4></div>
+            </div>
+            <div class="row mt-2">
+                <div class="form-container col" >
+                  <form action="/api/project/add" method="post" onsubmit="return checkProjectForm()">
+                  <div class="form-group row ">
+                    <div class="col-sm-12 ">
+                      <label for="name">Titre de projet</label>
+                    </div>
+                    <div class="col-sm-12 m-auto">
+                      <input type="text" class="form-control " id="titre" name="titre" placeholder="titre de projet ...">
+                      <div id="validationFeedback" class="invalid-feedback">
+                        Le nom de votre nouveau projet doit  être non vide 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <div class="col-sm-12 ">
+                      <label for="first_name">Description </label>
+                    </div>
+                    <div class="col-sm-12 m-auto">
+                      <input type="text" class="form-control " id="description" name="description" placeholder="Décrivez l'idée générale de votre projet ...">
+                      <div id="validationFeedback" class="invalid-feedback">
+                        Le description de projet  doit être non vide .
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <div class="col-sm-12 ">
+                      <label for="day">Date début</label>
+                    </div>
+                    <div class="col-sm-4 m-auto">
+                      <input type="text" class="form-control " id="day" name="day" placeholder="Jour" min=01 max=31>
+                      <div id="validationFeedback" class="invalid-feedback">
+                        Le jour saisie est invalide
+                      </div>
+                      
+                    </div>
+                    <div class="col-sm-4 m-auto">
+                      <select class="custom-select" id="month" name="month">
+                        <option value"invalid_choice">Mois</option>
+                        <option value"Janvier">Janvier</option>
+                        <option value"Février">Février</option>
+                        <option value"Mars"> Mars</option>
+                        <option value"Avril">Avril</option>
+                        <option value"Mai">Mai</option>
+                        <option value"Juin">Juin</option>
+                        <option value"Juillet"> Juillet</option>
+                        <option value"Août">Août</option>
+                        <option value"Septembre">Septembre</option>
+                        <option value"Octobre">Octobre</option>
+                        <option value"Novembre">Novembre</option>
+                        <option value"Décembre">Décembre</option>
+                      </select>
+                      <div id="validationFeedback" class="invalid-feedback">
+                        Veuillez sélectionner  le mois de début de votre projet 
+                      </div>                          
+                    </div>
+                    <div class="col-sm-4 m-auto">
+                      <input type="text" class="form-control " id="year" name="year" placeholder="Année">
+                      <div id="validationFeedback" class="invalid-feedback">
+                       Veuillez sélectionner l'année de début de votre projet 
+                      </div>
+                    </div>
+                  </div>  
+                  <div class="form-group row ">
+                    <div class="col-sm-12 ">
+                      <label for="country">Détails de projet</label>
+                    </div>
+                    <div class="col-sm-4 m-auto">
+                      <input type="text" class="form-control " id="budget" name="budget" placeholder="le budget de votre projet...">
+                      <div id="validationFeedback" class="invalid-feedback">
+                        Le budget de projet est composé uniquement par des chiffres 0-9 et le caractère '.' ou ','
+                      </div>
+                    </div>
+                    <div class="col-sm-4 m-auto">
+                      <input type="text" class="form-control " id="cahierCharge" name="cahierCharge" placeholder="le lien vers le cahier de charge ">
+                      <div id="validationFeedback" class="invalid-feedback">
+                        Le lien doit avoir la forme www.lien.domaine
+                      </div>
+                    </div>
+                    <div class="col-sm-4 m-auto">
+                      <select name="domaine" id="domaine" class="form-control">
+                        <option value="Invalid_choice">Dans quel domaine est-il votre projet?</option>
+                        <option value="/assets/uploads/domaines/agriculture.jpg-AGRICULTURE-ALIMENTATION" >AGRICULTURE-ALIMENTATION</option>
+                        <option value="/assets/uploads/domaines/alimentation.jpg-TRAVAUX ET CONSTRUCTION">TRAVAUX ET CONSTRUCTION</option>
+                        <option value="/assets/uploads/domaines/security.jpg-ARMÉE-SÉCURITÉ-SECOURS">ARMÉE-SÉCURITÉ-SECOURS</option>
+                        <option value="/assets/uploads/domaines/architecture.jpg-RTISANAT D’ART-DESIGN-MODE">ARTISANAT D’ART-DESIGN-MODE</option>
+                        <option value="/assets/uploads/domaines/finance.jpg-BANQUE-FINANCE-ASSURANCE">BANQUE-FINANCE-ASSURANCE</option>
+                        <option value="/assets/uploads/domaines/biology.jpg-BIOLOGIE-CHIMIE">BIOLOGIE-CHIMIE</option>
+                        <option value="/assets/uploads/domaines/visualProd.jpg-CINÉMA-AUDIOVISUEL-JEUX VIDÉO">CINÉMA-AUDIOVISUEL-JEUX VIDÉO</option>
+                        <option value="/assets/uploads/domaines/commerce.jpg-COMMERCE-IMMOBILIER">COMMERCE-IMMOBILIER</option>
+                        <option value="/assets/uploads/domaines/journalis.jpg-COMMUNICATION-JOURNALISME">COMMUNICATION-JOURNALISME</option>
+                        <option value="/assets/uploads/domaines/culture.jpg-DROIT-JUSTICE">CULTURE-SPECTACLE</option>
+                        <option value="/assets/uploads/domaines/droits.jpg-DROIT-JUSTICE">DROIT-JUSTICE</option>
+                        <option value="/assets/uploads/domaines/droits.jpg-EDITION-IMPRIMERIE-LIVRE">EDITION-IMPRIMERIE-LIVRE</option>
+                        <option value="/assets/uploads/domaines/robotics.jpg-ELECTRICITÉ-ELECTRONIQUE-ROBOTIQUE">ELECTRICITÉ-ELECTRONIQUE-ROBOTIQUE</option>
+                        <option value="/assets/uploads/domaines/energy.jpg-ENERGIE">ENERGIE</option>
+                        <option value="/assets/uploads/domaines/teaching.jpg-ENSEIGNEMENT-FORMATION-INSERTION">ENSEIGNEMENT-FORMATION-INSERTION</option>
+                        <option value="/assets/uploads/domaines/environment.jpg-ENVIRONNEMENT">ENVIRONNEMENT</option>
+                        <option value="/assets/uploads/domaines/management.jpg-GESTION-COMPTABILITÉ-RH">GESTION-COMPTABILITÉ-RH</option>
+                        <option value="/assets/uploads/domaines/hotellerie.jpg-HÔTELLERIE-RESTAURATION-TOURISME">HÔTELLERIE-RESTAURATION-TOURISME</option>
+                        <option value="/assets/uploads/domaines/humanitaire.jpg-HUMANITAIRE">HUMANITAIRE</option>
+                        <option value="/assets/uploads/domaines/coding.jpg-INFORMATIQUE-WEB-RÉSEAUX">INFORMATIQUE-WEB-RÉSEAUX</option>
+                        <option value="/assets/uploads/domaines/lettres.jpg-LETTRES-SCIENCES HUMAINES-LANGUES">LETTRES-SCIENCES HUMAINES-LANGUES</option>
+                        <option value="/assets/uploads/domaines/fabrication.jpg-MATÉRIAUX-INDUSTRIE">MATÉRIAUX-INDUSTRIE</option>
+                        <option value="/assets/uploads/domaines/mecanics.jpg-MÉCANIQUE-AUTOMOBILE">MÉCANIQUE-AUTOMOBILE</option>
+                        <option value="/assets/uploads/domaines/medical.jpg-SANTÉ-PARAMÉDICAL">SANTÉ-PARAMÉDICAL</option>
+                        <option value="/assets/uploads/domaines/sciences.jpg-SCIENCES PHYSIQUE-MATHS-DATA">SCIENCES PHYSIQUE-MATHS-DATA</option>
+                        <option value="/assets/uploads/domaines/cosmetology.jpg-SOINS-ESTHÉTIQUE-COIFFURE">SOINS-ESTHÉTIQUE-COIFFURE</option>
+                        <option value="/assets/uploads/domaines/sport.jpg-SPORT-ANIMATION">SPORT-ANIMATION</option>
+                        <option value="/assets/uploads/domaines/logisitcs.jpg-TRANSPORT-LOGISTIQUE">TRANSPORT-LOGISTIQUE</option>
+                        <option value="/assets/uploads/domaines/projets.jpg-Autre...">Autre...</option>
+                        </select>
+                      <div id="validationFeedback" class="invalid-feedback">
+                        Veuillez choisir le domaine de votre projet .
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <div class="col-sm-12 ">
+                      <label for="country">Critères de terminaison de votre projet(definition of done)</label>
+                    </div>
+                    <div class="col-sm-12 m-auto">
+                      <input type="text"  class="form-control " id="dod" name="dod" placeholder="Décrivez les critères de terminaison de votre projet...">
+                      <div id="validationFeedback" class="invalid-feedback">
+                        veuillez définir les critères de terminaison de votre projet.
+                      </div>
+                    </div>
+                   
+                  </div>
+                  <div class="form-group row ">
+                    <div class="col-sm-12 ">
+                      <label for="country">Identifiez le Scrum Master de votre projet </label>
+                    </div>
+                    <div class="col-sm-12 m-auto">
+
+                        <select name="scrumMaster" id="scrumMaster" class="form-control">
+                            <option >Veuillez sélectionner le Scrum Master de votre projet </option>
+                            <%for(var i=0;i<users.length;i++)
+                            {%>
+                              <option value="<%=users[i]._id%>"><%=users[i].prenom%> <%=users[i].nom%></option>
+                           <%}%>
+                            </select>
+                      <div id="validationFeedback" class="invalid-feedback">
+                        Veuillez choisir le Scrum Master de votre projet 
+                      </div>
+                    </div>
+                   
+                  </div>
+                           
+                  <div class="row d-flex justify-content-center">
+                    <div class=" mt-2 col-4 justify-content-around d-flex ">
+                        <button  type="reset" class="btn " id="prev" >Annuler<i class="bi bi-x"></i></button>
+                        <button  type="submit" class="btn " id="next" >Confirmer<i class="bi bi-check2"></i></button>
+                      </div>
+                  </div>                 
+                  
+                </form>
+                </div>
+            </div>
+            
+            <!--first row end -->
+ 
+
+         </div>
+          
+       </div>
+  </div>
+  </div>
+    <script src="assets/js/navbar.js" ></script>
+    <script src="/assets/js/registration.js"></script>
+
+</body>
+</html>

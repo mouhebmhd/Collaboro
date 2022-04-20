@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Collaboro | Créer une nouvelle sprint</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/assets/js/navbar.js"></script>
+</head>
+
+<body>
+  <div class="container-scroller  ">
+    <!--navbar start-->
+    <nav class="navbar  fixed-top navbar-light shadow-sm  d-flex  align-items-center ">
+      <a class="navbar-brand " href="/index">
+        <img src="/assets/img/logo.png" class="d-inline-block align-top"> </a>
+      <ul class="nav justify-content-end ">
+        <li class="nav-item navbar-item">
+          <a class="nav-link count-indicator " href="/chat">
+            <i class="bi bi-envelope-fill mr-5 "></i>
+            <span class="count1"></span>
+          </a>
+        </li>
+        <li class="nav-item navbar-item">
+          <a class="nav-link count-indicator " href="/notification">
+            <i class="bi bi-bell-fill mr-4 "></i>
+            <span class="count"></span>
+          </a>
+        </li>
+        <li class="nav-item  mr-5 navbar-item">
+          <a class="nav-link profile-photo " href="/EditMyProfile/<%= data._id%>"><img src="<%=data.photo%>">
+          </a>
+        </li>
+
+
+      </ul>
+    </nav>
+    <!--navbar end-->
+    <div class="container-fluid page-body-wrapper" id="chat-container">
+      <!--sidebar start-->
+      <nav class="sidebar shadow flex-row align-items-start mx-0 px-0  " id="sidebar">
+        <ul class="nav" id="sidebar">
+          <li class="nav-item nav-link">
+            <button onclick="toggleNavbar()" class="btn btn-lg  " id="btnToggler"><i
+                class="bi bi-arrow-return-left"></i></button>
+          </li>
+          <li class="nav-item  ">
+            <a class="nav-link" href="/dashboard">
+              <i class="bi bi-grid"></i>
+              <span class="menu-title mx-2">Acceuil</span>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="/projets">
+              <i class="bi bi-code-square"></i>
+              <span class="menu-title mx-2 ">Projets</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" data-toggle="collapse" href="/sprints">
+              <i class="bi bi-arrow-repeat"></i>
+              <span class="menu-title mx-2 ">Sprints</span>
+            </a>
+          </li>
+
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="/taches">
+              <i class="bi bi-list-task"></i>
+              <span class="menu-title mx-2">Tâches</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/meeting">
+              <i class="bi bi-camera-video"></i>
+              <span class="menu-title mx-2 ">Meeting</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/chat">
+              <i class="bi bi-chat-left"></i>
+              <span class="menu-title mx-2">Chat</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/chat">
+              <i class="bi bi-bell"></i>
+              <span class="menu-title mx-2">Notification</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/EditMyProfile">
+              <i class="bi bi-people"></i>
+              <span class="menu-title mx-2">Profil</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/documentation">
+              <i class="bi bi-book"></i>
+              <span class="menu-title mx-2">Documentation</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/">
+              <i class="bi bi-box-arrow-left"></i>
+              <span class="menu-title mx-2">Déconnexion</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <nav class="mobile-sidebar shadow  flex-row align-items-start mx-0 px-0    " id="mobile-sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <button onclick="toggleNavbar()" class="btn btn-lg " id="btnToggler"><i
+                class="bi bi-arrow-return-right"></i></button>
+          </li>
+          <li class="nav-item  ">
+            <a class="nav-link" href="/index.html">
+              <i class="bi bi-grid"></i>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="/projets">
+              <i class="bi bi-code-square"></i>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" data-toggle="collapse" href="/sprints">
+              <i class="bi bi-arrow-repeat"></i>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="/taches">
+              <i class="bi bi-list-task"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/meeting">
+              <i class="bi bi-camera-video"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/chat">
+              <i class="bi bi-chat-left"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/notification">
+              <i class="bi bi-bell"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/EditMyProfile">
+              <i class="bi bi-people"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/documentation">
+              <i class="bi bi-book"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/logout">
+              <i class="bi bi-box-arrow-left"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+        <!--sidebar end-->
+        <div class=" container-fluid main-panel" id=main-panel-home >
+          <div class="content-wrapper" id="main-panel-wrapper">
+            <!--First row start-->
+            <div class="row d-flex justify-content-between">
+                <div ><h5 class="PageTitle ">Étape 1 : Description de sprint</h5></div>
+            </div>
+            <div class="row mt-2">
+                <div class="form-container col" >
+                  <div class="form-group row ">
+                    <div class="col-sm-12 ">
+                      <label for="name">Titre de sprint</label>
+                    </div>
+                    <div class="col-sm-12 m-auto">
+                      <input type="text" class="form-control titre" id="titre" name="titre" placeholder="titre de sprint ">
+                      <div id="validationFeedback" class="invalid-feedback">
+                        Le titre de sprint doit  être non vide 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <div class="col-sm-12 ">
+                      <label for="first_name">Description de l'objectif de sprint </label>
+                    </div>
+                    <div class="col-sm-12 m-auto">
+                      <input type="text" class="form-control " id="description" name="description" placeholder="Décrivez brievement l'objectif de votre sprint ...">
+                      <div id="validationFeedback" class="invalid-feedback">
+                        Le description de sprint  doit être non vide .
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <div class="col-sm-12 ">
+                      <label for="day">Disponibilité</label>
+                    </div>
+                    <div class="col-sm-4 m-auto">
+                      <input type="number" class="form-control " id="hours" name="hours" placeholder="Veuillez préciser le nombre d'heures de travail par jour" min=01 max=24>
+                      <div id="validationFeedback" class="invalid-feedback">
+                        Veuillez préciser le nombre d'heures de travail par jour  
+                      </div>
+                      
+                    </div>
+                    <div class="col-sm-4 m-auto">
+                      <select class="custom-select" id="days" name="days">
+                        <option value="invalid_choice">Veuillez préciser le nombre de jour de travail pendant chaque semaine</option>
+                        <option value="1">1 Jour</option>
+                        <option value="2">2 Jours</option>
+                        <option value="3">3 Jours</option>
+                        <option value="4">4 Jours</option>
+                        <option value="5">5 Jours</option>
+                        <option value="6">6 Jours</option>
+                        <option value="7">7 Jours</option>
+                      </select>
+                      <div id="validationFeedback" class="invalid-feedback">
+                        Veuillez sélectionner  le nombre de jours de travail pendant chaque semaine
+                      </div>                          
+                    </div>
+                    <div class="col-sm-4 m-auto">
+                        <select class="custom-select" id="weeks" name="weeks">
+                          <option value="invalid_choice">Veuillez préciser la durée de sprint </option>
+                          <option value="1">1 Semaine</option>
+                          <option value="2">2 Semaines</option>
+                          <option value="3">3 Semaines</option>
+                          <option value="4">4 Semaines</option>
+                          <option value="5">5 Semaines</option>
+                          <option value="6">6 Semaines</option>
+                        </select>
+                        <div id="validationFeedback" class="invalid-feedback">
+                          Veuillez sélectionner  la durée de Sprint
+                        </div>                          
+                      </div>
+                   
+                  </div>  
+                  <div class="form-group row ">
+                    <div class="col-sm-12 ">
+                      <label for="day">Date Début </label>
+                    </div>
+                    <div class="col-sm-4 m-auto">
+                      <input type="Number" class="form-control " id="jour" name="jour" placeholder="Jour" min="0" max="31" > 
+                      <div id="validationFeedback" class="invalid-feedback">
+                        Le jour saisie est invalide
+                      </div>
+                      
+                    </div>
+                    <div class="col-sm-4 m-auto">
+                      <select class="custom-select" id="month" name="month">
+                        <option value"invalid_choice">Mois </option>
+                        <option value"Janvier">Janvier</option>
+                        <option value"Février">Février</option>
+                        <option value"Mars"> Mars</option>
+                        <option value"Avril">Avril</option>
+                        <option value"Mai">Mai</option>
+                        <option value"Juin">Juin</option>
+                        <option value"Juillet"> Juillet</option>
+                        <option value"Août">Août</option>
+                        <option value"Septembre">Septembre</option>
+                        <option value"Octobre">Octobre</option>
+                        <option value"Novembre">Novembre</option>
+                        <option value"Décembre">Décembre</option>
+                      </select>
+                      <div id="validationFeedback" class="invalid-feedback">
+                        Veuillez sélectionner dans quel mois vous allez commencer le sprint
+                      </div>                          
+                    </div>
+                    <div class="col-sm-4 m-auto">
+                      <input type="text" class="form-control " id="year" name="year" placeholder="Année" >
+                      <div id="validationFeedback" class="invalid-feedback">
+                       Veuillez sélectionner dans quelle année vous allez commencer le sprint.L'année doit  être supèrieur ou égale  à l'année courante.
+                      </div>
+                    </div>
+                   
+                  </div>  
+                  <div class="row">
+                    <div ><h5 class="PageTitle ">Étape 2 : Choix des User Stories</h5></div>
+                </div>
+                <div class="row">
+                    <p class="alert alert-success">Veuillez faites cocher les user stories que vous souhaitez ajouter au backlog de sprint.Les tâches associés à chacune des user stories choisies seront ajoutés au backlog de sprint automatiquement .</p>
+                  <%if(stories.length==0)
+                  {%>
+                    <p class="alert alert-danger">Attention ,le backlog de produit ne contient aucune user story.Vous ne pouvez pas commencer une nouvellesprint avant d'ajouter des user stories dans le backlog de produit.</p>
+
+                  <%}
+                  else{%>
+                    <p class="alert alert-danger nonValidatedForm d-none">Attention ,Vous n'avez pas encore sélectionner des user story pour la backlog de sprint.Veuillez sélectionner au moins une user story.</p>
+                  </div>
+                <div class="row mt-2">
+                    <div class="col m-1 d-flex flex-column   p-2 ">
+                        <div class="col text-center alert alert-danger">Backlog De Produit</div>
+                        <div class="col row">
+                          <%for(var i=0;i<stories.length;i++)
+                          {%>
+                            <div class="card  userStoryCardPb col-md-6 col-sm-12  mb-1 p-1"  id="" draggable="true">
+                              <ul class="list-group list-group-flush">
+                                <li class="list-group-item  p-0 pt-1 userStoryInfos ">
+                                  <button type="button" class="btn addUSSprint text-muted m-0 p-0" onclick="ToggleItemSprintBacklog(event)" id="<%=stories[i]._id%>"><i class="bi bi-check2-all h1"></i></button>
+                                      <div class="col-12 d-flex justify-content-between">
+                                        <p class="storyIdTitle font-weight-bold" id="">Priorité</p>
+                                        <p class="storyIPriority text-primary"><%=stories[i].priorite%></p>
+                                      </div>
+                                      <div class="col-12">
+                                        <p class="storyEstimatioTitle font-weight-bold">Description</p>
+                                        <p class="storyActorValue text-warning">En tant que  <span class="font-weight-bold text-dark"><%=stories[i].acteur%></span></p>
+                                        <p class="storyActionValue text-success">Je souhaite  <span class="font-weight-bold text-dark"><%=stories[i].action%></span></p>
+                                        <p class="storyObjectifValue text-info">Afin que  <span class="font-weight-bold text-dark"><%=stories[i].objectif%></span></p>
+                                      </div>
+                                </li>
+                              </ul>
+                          </div>
+                          <%}%>
+
+                    </div>
+                    </div>
+
+                </div>      
+                  <div class="row d-flex justify-content-center">
+                    <div class=" mt-2 col-4 justify-content-around d-flex ">
+                        <button  type="reset" class="btn prev" >Annuler<i class="bi bi-x"></i></button>
+                        <button  type="button" class="btn startSprint"  onclick="startNewSprint(event)" id="<%=projet._id%>" >Commencer la sprint <i class="bi bi-check2"></i></button>
+                      </div>
+                  </div>  
+                  <%}%>               
+                  
+                  
+                </div>
+            </div>
+            
+            <!--first row end -->
+ 
+
+         </div>
+          
+       </div>
+  </div>
+  </div>
+    <script src="/assets/js/navbar.js" ></script>
+    <script src="/assets/js/addItemtoSprintBacklog.js"></script>
+
+</body>
+</html>

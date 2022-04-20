@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Collaboro | Journal d'obstacles </title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/assets/js/projects.js"></script>
+</head>
+<body >
+  <div class="container-scroller  ">
+    <!--navbar start-->
+    <nav class="navbar  fixed-top navbar-light shadow-sm  d-flex  align-items-center ">
+      <a class="navbar-brand " href="/dashboard">
+        <img src="/assets/img/logo.png"  class="d-inline-block align-top"> </a>
+        <ul class="nav justify-content-end ">
+          <li class="nav-item navbar-item">
+            <a class="nav-link count-indicator " href="/chat">
+              <i class="bi bi-envelope-fill mr-5 "></i>
+              <span class="count1"></span>
+            </a>
+          </li>
+          <li class="nav-item navbar-item">
+            <a class="nav-link count-indicator " href="/notification">
+              <i class="bi bi-bell-fill mr-4 "></i>
+              <span class="count"></span>
+            </a>
+          </li>
+          <li class="nav-item  mr-5 navbar-item">
+            <a class="nav-link profile-photo " href="/EditMyProfile/<%= data._id%>"><img src="<%=data.photo%>" >
+            </a>
+          </li>
+  
+        
+        </ul>
+    </nav>    <!--navbar end-->
+    <div class="container-fluid page-body-wrapper">
+      <!--sidebar start-->
+      <nav class="sidebar shadow flex-row align-items-start mx-0 px-0  " id="sidebar">
+    <ul class="nav" id="sidebar">
+      <li class="nav-item nav-link">
+          <button onclick="toggleNavbar()" class="btn btn-lg  " id="btnToggler"><i class="bi bi-arrow-return-left"></i></button>
+      </li>
+      <li class="nav-item  ">
+        <a class="nav-link" href="/dashboard">
+          <i class="bi bi-grid"></i>
+          <span class="menu-title mx-2">Acceuil</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" data-toggle="collapse" href="/projets"  >
+          <i class="bi bi-code-square"></i>
+          <span class="menu-title mx-2 ">Projets</span>
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" data-toggle="collapse" href="/sprints"  >
+          <i class="bi bi-code-square"></i>
+          <span class="menu-title mx-2 ">Sprints</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/taches" >
+          <i class="bi bi-list-task"></i>
+          <span class="menu-title mx-2">Tâches</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/meeting">
+          <i class="bi bi-camera-video"></i>
+          <span class="menu-title mx-2 ">Meeting</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/chat">
+          <i class="bi bi-chat-left"></i>
+          <span class="menu-title mx-2">Chat</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" data-toggle="collapse" href="/notification">
+          <i class="bi bi-bell"></i>
+          <span class="menu-title mx-2">Notification</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/EditMyProfile">
+          <i class="bi bi-people"></i>
+          <span class="menu-title mx-2">Profil</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/documentation">
+          <i class="bi bi-book"></i>
+          <span class="menu-title mx-2">Documentation</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/logout">
+          <i class="bi bi-box-arrow-left"></i>
+          <span class="menu-title mx-2">Déconnexion</span>
+        </a>
+      </li>
+    </ul>
+</nav>
+
+      <nav class="mobile-sidebar shadow  flex-row align-items-start mx-0 px-0    " id="mobile-sidebar">
+    <ul class="nav" >
+      <li class="nav-item">
+        <button onclick="toggleNavbar()" class="btn btn-lg " id="btnToggler"><i class="bi bi-arrow-return-right"></i></button>
+      </li>
+      <li class="nav-item  ">
+        <a class="nav-link" href="/dashboard">
+          <i class="bi bi-grid"></i>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" data-toggle="collapse" href="/projets"  >
+          <i class="bi bi-code-square"></i>
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" data-toggle="collapse" href="/sprints"  >
+          <i class="bi bi-arrow-repeat"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/taches" >
+          <i class="bi bi-list-task"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/meeting">
+          <i class="bi bi-camera-video"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/chat">
+          <i class="bi bi-chat-left"></i>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" data-toggle="collapse" href="/notification">
+          <i class="bi bi-bell"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/EditMyProfile">
+          <i class="bi bi-people"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/documentation">
+          <i class="bi bi-book"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/logout">
+          <i class="bi bi-box-arrow-left"></i>
+        </a>
+      </li>
+    </ul>
+</nav>
+        <!--sidebar end-->
+        <div class=" container-fluid main-panel" id=main-panel-home >
+          <div class="content-wrapper" id="main-panel-wrapper">
+            <div class="row d-flex justify-content-between ">
+                <h3 class="text jrnlObs">Journal d'obstacle</h3>              
+                <button class="btn add-button mr-3 text-light" onclick="addNewObstacle()" id="<%=projet._id%>">Nouvelle obstacle<i class="bi bi-plus ml-1 "></i></button>
+            </div>
+         <!--Second row start-->
+            <div class="row mt-2 " >
+                <div class="col  p-2 mr-1 projectInfosContainer">
+                    <p class="idProject font-weight-bold ">Titre de  projet  </p>
+                    <p id="projectId"><%=projet.titre%></p>
+                </div>
+                <div class="col  p-2 mr-1  projectInfosContainer">
+                    <p class="issuesCount text-danger font-weight-bold ">Nombre d'obstacle</p>
+                    <p id="issuesCount"><%= obstacles.length%></p>
+                </div>
+                <div class="col  p-2 projectInfosContainer mr-1">
+                    <p class="issuesCount font-weight-bold text-success">Nombre d'obstacle résolu</p>
+                    <p id="issuesSolvedCount"><%=stats.data.solved%></p>
+                </div>
+                <div class="col p-2 projectInfosContainer ml-0">
+                    <p class="issuesCount font-weight-bold text-primary">Nombre d'obstacle en attente</p>
+                    <p id="issuesWaitingCount"><%=stats.data.waiting%></p>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <table class="table issuesList bg-white">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Déclaré par</th>
+                        <th scope="col">Date de  déclaration</th>
+                        <th scope="col">Statut</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody class="obstaclesList">
+                      <%if(obstacles.length>0)
+                      {
+                        for(var i=0;i<obstacles.length;i++)
+                        {%>
+                          <tr class="obstacleItem">
+                            <th scope="row"><%=i+1%></th>
+                            <td><input type="text" class="form-control d-none" id="description" class="description" placeholder="Description de problème" value="<%=obstacles[i].decription%>"><span class="itemDesc"><%=obstacles[i].decription%></span></td>
+                            <td><%= personalData.data[i].prenom%> <%= personalData.data[i].nom%></td>
+                            <td><%= obstacles[i].dateDeclaration%></td>
+                            <td class="issuesStatus"><%=obstacles[i].statut%></td>
+                            <td class="issuesTools">
+                              <button type="button" class="btn saveIssue  btn-outline-primary mr-1 text-primary d-none"   onclick="saveIssue(event)"id="<%= obstacles[i]._id%>"><i class="bi bi-brush"></i></button>
+                                <button type="button" class="btn btn-outline-warning modifyIssue mr-1 text-warning <%if(data._id!=obstacles[i].declaredBY){%>d-none<%}%>"   onclick="modifyIssue(event)" id="<%= obstacles[i]._id%>"><i class="bi bi-gear"></i></button>
+                                <button type="button" class="btn  btn-outline-danger deleteIssue mr-1 text-danger <%if(data._id!=obstacles[i].declaredBY){%>d-none<%}%>"    onclick="deleteIssue(event)" id="<%= obstacles[i]._id%>"><i class="bi bi-trash"></i></button>
+                                <button type="button" class="btn solveIssue  btn-outline-success mr-1 text-success"   onclick="solveIssue(event)"id="<%= obstacles[i]._id%>"><i class="bi bi-check2"></i></button>
+                            </td>
+                          </tr>
+                        <%}
+                      }
+                      %>
+
+                      <tr class="obstacleModel d-none">
+                        <th scope="row"></th>
+                        <td><input type="text" class="form-control" id="description" class="description" placeholder="Description de problème"></td>
+                        <td><%=data.prenom%> <%=data.nom%></td>
+                        <td><%=date.data%></td>
+                        <td  class="issuesStatus">En Attente</td>
+                        <td class=" issuesTools">
+                            <button type="button" class="btn   btn-secondary  text-light mr-1 " id="<%=projet._id%>" onclick="createObstacle(event)">Créer<i class="bi bi-check2 ml-2"></i></button>
+                        </td>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+            </div>
+          <!--Second row end-->
+
+         </div>
+          
+       </div>
+  </div>
+  </div>
+    <script src="/assets/js/statisticsIssues.js"></script>
+    <script src="/assets/js/navbar.js" ></script>
+
+</body>
+</html>

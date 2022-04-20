@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Collaboro | Détails de projet</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/assets/js/navbar.js" ></script>
+</head>
+<body >
+  <div class="container-scroller  ">
+    <!--navbar start-->
+    <nav class="navbar  fixed-top navbar-light shadow-sm  d-flex  align-items-center ">
+      <a class="navbar-brand " href="/index">
+        <img src="/assets/img/logo.png"  class="d-inline-block align-top"> </a>
+        <ul class="nav justify-content-end ">
+          <li class="nav-item navbar-item">
+            <a class="nav-link count-indicator " href="/chat">
+              <i class="bi bi-envelope-fill mr-5 "></i>
+              <span class="count1"></span>
+            </a>
+          </li>
+          <li class="nav-item navbar-item">
+            <a class="nav-link count-indicator " href="/notification">
+              <i class="bi bi-bell-fill mr-4 "></i>
+              <span class="count"></span>
+            </a>
+          </li>
+          <li class="nav-item  mr-5 navbar-item">
+            <a class="nav-link profile-photo " href="/EditMyProfile/<%= data._id%>"><img src="<%=data.photo%>" >
+            </a>
+          </li>
+
+        
+        </ul>
+    </nav>
+    <!--navbar end-->
+    <div class="container-fluid page-body-wrapper" id="chat-container">
+      <!--sidebar start-->
+      <nav class="sidebar shadow flex-row align-items-start mx-0 px-0  " id="sidebar">
+        <ul class="nav" id="sidebar">
+          <li class="nav-item nav-link">
+              <button onclick="toggleNavbar()" class="btn btn-lg  " id="btnToggler"><i class="bi bi-arrow-return-left"></i></button>
+          </li>
+          <li class="nav-item  ">
+            <a class="nav-link" href="/dashboard.html">
+              <i class="bi bi-grid"></i>
+              <span class="menu-title mx-2">Acceuil</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" data-toggle="collapse" href="/projets"  >
+              <i class="bi bi-code-square"></i>
+              <span class="menu-title mx-2 ">Projets</span>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="/sprints"  >
+              <i class="bi bi-arrow-repeat"></i>
+              <span class="menu-title mx-2 ">Sprints</span>
+            </a>
+          </li>
+        
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="/taches" >
+              <i class="bi bi-list-task"></i>
+              <span class="menu-title mx-2">Tâches</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/meeting">
+              <i class="bi bi-camera-video"></i>
+              <span class="menu-title mx-2 ">Meeting</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/chat">
+              <i class="bi bi-chat-left"></i>
+              <span class="menu-title mx-2">Chat</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/chat">
+              <i class="bi bi-bell"></i>
+              <span class="menu-title mx-2">Notification</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/EditMyProfile">
+              <i class="bi bi-people"></i>
+              <span class="menu-title mx-2">Profil</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/documentation">
+              <i class="bi bi-book"></i>
+              <span class="menu-title mx-2">Documentation</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="/">
+              <i class="bi bi-box-arrow-left"></i>
+              <span class="menu-title mx-2">Déconnexion</span>
+            </a>
+          </li>
+        </ul>
+    </nav>
+    <nav class="mobile-sidebar shadow  flex-row align-items-start mx-0 px-0    " id="mobile-sidebar">
+      <ul class="nav" >
+        <li class="nav-item">
+          <button onclick="toggleNavbar()" class="btn btn-lg " id="btnToggler"><i class="bi bi-arrow-return-right"></i></button>
+        </li>
+        <li class="nav-item  ">
+          <a class="nav-link" href="/dashboard">
+            <i class="bi bi-grid"></i>
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" data-toggle="collapse" href="/projets"  >
+            <i class="bi bi-code-square"></i>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" data-toggle="collapse" href="/sprints"  >
+            <i class="bi bi-arrow-repeat"></i>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" data-toggle="collapse" href="/taches" >
+            <i class="bi bi-list-task"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="/meeting">
+            <i class="bi bi-camera-video"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="/chat">
+            <i class="bi bi-chat-left"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="/notification">
+            <i class="bi bi-bell"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="/EditMyProfile">
+            <i class="bi bi-people"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="/documentation">
+            <i class="bi bi-book"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="/logout">
+            <i class="bi bi-box-arrow-left"></i>
+          </a>
+        </li>
+      </ul>
+  </nav>
+        <!--sidebar end-->
+         <!--sidebar end-->
+         <div class=" container-fluid main-panel " id="main-panel-home" >
+          <div class="content-wrapper " id="main-panel-wrapper">
+            <!--First row start-->
+            <div class="row mt-2">
+                <div class="col-md-6 col-sm-12 h5 ml-3 m-md-0 m-sm-2  p-0">
+                  <span class="PageTitle"> Identifiant de Projet: </span><span><%=projet._id%></span>
+                </div>  
+                <div class="col-md-6 col-sm-12 d-flex justify-content-end">
+                  <a  class="btn btn-danger text-light mr-2" href="/project/devTeam/<%=projet._id%>">Équipe de Développment<i class="bi bi-people ml-2 "></i></a>
+                  <a class="btn btn-primary text-light mr-2 " href="/project/showProductBacklog/<%=projet._id%>">Product Backlog<i class="bi bi-layers ml-2 "></i></a>
+                  <a type="button" class="btn  text-light mr-2 productPersonaShow" href="/project/showPersonas/<%=projet._id%>">Personas<i class="bi bi-person ml-2 "></i></a>
+                  <a type="button" class="btn  text-light mr-2 productSHShow col" href="/project/showSh/<%=projet._id%>">Stakeholders<i class="bi bi-people ml-2 "></i></a>
+
+
+                </div>
+              
+              </div>
+              <div class="row my-2 mx-0">
+               <div class="col bg-warning projectInfosContainer" id="splittedBackground" style="height:200px;">
+               </div>
+              </div>
+              <div class="row my-2 mx-0">
+                <div class=" col-md-4 col-sm-12 p-2 projectInfosContainer" >
+                  <div class="form-group row ">
+                    <div class="col-sm-12 ">
+                      <label for="name" class="font-weight-bold">Titre de projet</label>
+                    </div>
+                    <div class="col-sm-12 m-auto">
+                      <%=projet.titre%>
+                    </div>
+                  </div>
+                  <div class="form-group row mt-0">
+                    <div class="col-sm-12 ">
+                      <label for="name" class="font-weight-bold">Description</label>
+                    </div>
+                    <div class="col-sm-12 m-auto">
+                      <%=projet.description%>
+                    </div>
+                  </div>   
+                  <div class="form-group row mt-0">
+                    <div class="col-sm-12 ">
+                      <label for="name" class="font-weight-bold">Date début </label>
+                    </div>
+                    <div class="col-sm-12 m-auto">
+                      <%=projet.dateDebut%>
+                    </div>
+                  </div>    
+                  <div class="form-group row mt-0">
+                    <div class="col-sm-12 ">
+                      <label for="name" class="font-weight-bold">Budget</label>
+                    </div>
+                    <div class="col-sm-12 m-auto">
+                      <%=projet.budget%>
+                    </div>
+                  </div>  
+                  <div class="form-group row mt-0">
+                    <div class="col-sm-12 ">
+                      <label for="name" class="font-weight-bold">Cahier des charges</label>
+                    </div>
+                    <div class="col m-auto  ">
+                     <span><%=projet.cahierCharge%></span>
+                    </div>
+                    
+                  </div>   
+                  <div class="form-group row mt-0">
+                    <div class="col-sm-12 ">
+                      <label for="name" class="font-weight-bold">Domaine d'activités</label>
+                    </div>
+                    <div class="col m-auto  ">
+                     <span><%=projet.domaine.substr(projet.domaine.indexOf('-')+1)%></span>
+                    </div>
+                    
+                  </div>   
+                  
+
+
+
+
+
+
+                </div>
+                <div class="col   ml-2  mt-md-0 mt-sm-2">
+                  <div class="row d-flex ">
+                  <div class="col m-1 bg-white projectInfosContainer " style="height:max-content;">
+                  <div class=" productOwnerPhoto" style="background-color:transparent;background-image:url(<%=productOwner.photo%>);"></div>
+                  <div class=" productOwnerText text-center font-weight-bold ">Product Owner</div>
+                  <div class=" productOwnerName text-center "><%=productOwner.nom%> <%=productOwner.prenom%></div>
+                  </div>
+                  <div class="col  m-1 bg-white projectInfosContainer " style="height:max-content;">
+                    <div class=" productOwnerPhoto"style="background-color:transparent;background-image:url(<%=scrumMaster.photo%>);"></div>
+                    <div class=" productOwnerText text-center font-weight-bold ">Scrum Master</div>
+                    <div class=" productOwnerName text-center "><%=scrumMaster.nom%> <%=scrumMaster.prenom%></div>
+                    </div>
+                    <%if(techlead=='no technical leader'){%>
+                      <div class="col  m-1 bg-white projectInfosContainer " style="height:max-content;">
+                        <div class="productOwnerPhoto" style="background-color:#4b49ac;"></div>
+                        <div class="  text-center font-weight-bold ">Chef technique</div>
+                        <div class="  text-center ">Non spécifié</div>
+                        </div>
+                    <%}else{%>
+                      <div class="col  m-1 bg-white projectInfosContainer " style="height:max-content;">
+                        <div class="productOwnerPhoto" style="background-color:transparent;background-image:url(<%=techlead.photo%>);"></div>
+                        <div class="  text-center font-weight-bold ">Chef technique</div>
+                        <div class="  text-center "><%=techlead.prenom%> <%=techlead.nom%></div>
+                        </div>
+                      <%}%>
+                      <div class="col-12  my-1 d-flex   p-0 " style="height:max-content;">
+                        <div class="col-4  m-1 bg-white projectInfosContainer " style="height:max-content;">
+                          <div class="iconContainerStats d-flex justify-content-center align-items-center"><i class="bi bi-stopwatch "></i></div>
+                          <div class="  text-center font-weight-bold ">Temps Travaillé</div>
+                          <div class="  text-center ">jours-mois-années</div>
+                          </div>
+                      <div class="col bg-white projectInfosContainer my-1 p-1" style="height:max-content;">
+                        <div class=" productOwnerText text-center font-weight-bold ">Progression</div>
+                          <div class="progress mt-5 mb-4 ">
+                            <div class="progress-bar  progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div>
+          
+                          </div>  
+                                   
+                       </div>
+                      </div>
+                      <div class="col-12  my-1 d-flex   p-0 " style="height:max-content;">
+                          <div class="col  m-1 bg-white projectInfosContainer " style="height:max-content;">
+                            <div class="iconContainerStatsRisks bg-warning d-flex justify-content-center align-items-center"><i class="bi bi-cone-striped "></i></div>
+                            <div class="  text-center font-weight-bold ">Risques Déclarés</div>
+                            <div class="  text-center "><%=statistics.data.risks%></div>
+                            </div>
+                            <div class="col  m-1 bg-white projectInfosContainer " style="height:max-content;">
+                              <div class="iconContainerStatsDanger bg-danger d-flex justify-content-center align-items-center"><i class="bi bi-radioactive "></i></div>
+                              <div class="  text-center font-weight-bold ">Obstacles Rencontrés</div>
+                              <div class="  text-center "><%=statistics.data.obstacles%></div>
+                              </div>
+                            
+                      </div>
+                      
+
+                </div>
+                </div>
+               
+              
+               
+
+                  
+
+              </div>
+              
+
+         </div>
+          
+       </div>
+  </div>
+  </div>
+</body>
+
+<script src="/assets/js/projects.js"></script>
+</html>

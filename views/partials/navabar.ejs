@@ -1,0 +1,24 @@
+<nav class="navbar  fixed-top navbar-light shadow-sm  d-flex  align-items-center ">
+    <a class="navbar-brand " href="/dashboard">
+      <img src="/assets/img/logo.png"  class="d-inline-block align-top"> </a>
+      <ul class="nav justify-content-end ">
+        <li class="nav-item navbar-item">
+          <a class="nav-link count-indicator " href="/chat">
+            <i class="bi bi-envelope-fill mr-5 "></i>
+            <span class="count1"></span>
+          </a>
+        </li>
+        <li class="nav-item navbar-item">
+          <a class="nav-link count-indicator " href="/notification">
+            <i class="bi bi-bell-fill mr-4 "></i>
+            <span class="count"></span>
+          </a>
+        </li>
+        <li class="nav-item  mr-5 navbar-item">
+          <a class="nav-link profile-photo " href="/EditMyProfile/<%= data._id%>"><img src="<%=data.photo%>" >
+          </a>
+        </li>
+
+      
+      </ul>
+  </nav>

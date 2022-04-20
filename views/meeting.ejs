@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Collaboro | Réunions</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body >
+  <div class="container-scroller  ">
+    <!--navbar start-->
+    <nav class="navbar  fixed-top navbar-light shadow-sm  d-flex  align-items-center ">
+    <a class="navbar-brand " href="/dashboard">
+      <img src="/assets/img/logo.png"  class="d-inline-block align-top"> </a>
+      <ul class="nav justify-content-end ">
+        <li class="nav-item navbar-item">
+          <a class="nav-link count-indicator " href="/chat">
+            <i class="bi bi-envelope-fill mr-5 "></i>
+            <span class="count1"></span>
+          </a>
+        </li>
+        <li class="nav-item navbar-item">
+          <a class="nav-link count-indicator " href="/notification">
+            <i class="bi bi-bell-fill mr-4 "></i>
+            <span class="count"></span>
+          </a>
+        </li>
+        <li class="nav-item  mr-5 navbar-item">
+          <a class="nav-link profile-photo " href="/EditMyProfile/<%= data._id%>"><img src="<%=data.photo%>" >
+          </a>
+        </li>
+
+      
+      </ul>
+  </nav>
+    <!--navbar end-->
+    <div class="container-fluid page-body-wrapper">
+      <!--sidebar start-->
+      <nav class="sidebar shadow flex-row align-items-start mx-0 px-0  " id="sidebar">
+    <ul class="nav" id="sidebar">
+      <li class="nav-item nav-link">
+          <button onclick="toggleNavbar()" class="btn btn-lg  " id="btnToggler"><i class="bi bi-arrow-return-left"></i></button>
+      </li>
+      <li class="nav-item  ">
+        <a class="nav-link" href="/dashboard">
+          <i class="bi bi-grid"></i>
+          <span class="menu-title mx-2">Acceuil</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" data-toggle="collapse" href="/projets"  >
+          <i class="bi bi-code-square"></i>
+          <span class="menu-title mx-2 ">Projets</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" data-toggle="collapse" href="/sprints"  >
+          <i class="bi bi-code-square"></i>
+          <span class="menu-title mx-2 ">Sprints</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/taches" >
+          <i class="bi bi-list-task"></i>
+          <span class="menu-title mx-2">Tâches</span>
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" data-toggle="collapse" href="/meeting">
+          <i class="bi bi-camera-video"></i>
+          <span class="menu-title mx-2 ">Meeting</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/chat">
+          <i class="bi bi-chat-left"></i>
+          <span class="menu-title mx-2">Chat</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" data-toggle="collapse" href="/notification">
+          <i class="bi bi-bell"></i>
+          <span class="menu-title mx-2">Notification</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/EditMyProfile">
+          <i class="bi bi-people"></i>
+          <span class="menu-title mx-2">Profil</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/documentation">
+          <i class="bi bi-book"></i>
+          <span class="menu-title mx-2">Documentation</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/logout">
+          <i class="bi bi-box-arrow-left"></i>
+          <span class="menu-title mx-2">Déconnexion</span>
+        </a>
+      </li>
+    </ul>
+</nav>
+
+      <nav class="mobile-sidebar shadow  flex-row align-items-start mx-0 px-0    " id="mobile-sidebar">
+    <ul class="nav" >
+      <li class="nav-item">
+        <button onclick="toggleNavbar()" class="btn btn-lg " id="btnToggler"><i class="bi bi-arrow-return-right"></i></button>
+      </li>
+      <li class="nav-item  ">
+        <a class="nav-link" href="/dashboard">
+          <i class="bi bi-grid"></i>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" data-toggle="collapse" href="/projets"  >
+          <i class="bi bi-code-square"></i>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" data-toggle="collapse" href="/sprints"  >
+          <i class="bi bi-arrow-repeat"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/taches" >
+          <i class="bi bi-list-task"></i>
+        </a>
+      </li>
+      <li class="nav-item active ">
+        <a class="nav-link" data-toggle="collapse" href="/meeting">
+          <i class="bi bi-camera-video"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/chat">
+          <i class="bi bi-chat-left"></i>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" data-toggle="collapse" href="/notification">
+          <i class="bi bi-bell"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/EditMyProfile">
+          <i class="bi bi-people"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/documentation">
+          <i class="bi bi-book"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="/logout">
+          <i class="bi bi-box-arrow-left"></i>
+        </a>
+      </li>
+    </ul>
+</nav>
+        <!--sidebar end-->
+        <div class=" container-fluid main-panel" id=main-panel-home >
+          <div class="content-wrapper" id="main-panel-wrapper">
+         <!--First row start-->              
+          <section id="personalMeetingsSection">
+            <div class="row d-flex justify-content-between ">
+              <h4 class="PageTitle">Vos Réunions</h4>
+               <button type="button" class="btn btn-primary createMeetingButton" onclick="createNewMeeting()">Créer une nouvelle réunion<i class="bi bi-plus-lg ml-2"></i></button>
+            </div>
+            <div class="card col-12 my-2 tasks-grid addMeetingContainer d-none">
+              <div class="card-body">
+                <h5 class="card-title PageTitle">Plannifier une nouvelle réunion</h5>
+                <div class="table-responsive">
+                  <table class="table ">
+                    <thead>
+                          <th>Titre de réunion</th>
+                          <th>Prévue le</th>
+                          <th>Catégorie</th>
+                          <th class="meetingProject d-none">Projet</th>
+                    </thead>
+                    <tbody>
+                          <tr>
+                            <td><input type="text" class="form-control" placeholder="Description" name="description" id="description"></td>
+                            <td class="d-flex">
+                              <input type="date" class="form-control col mx-1"  name="date" id="date">
+                              <input type="time" class="form-control col mx-1 "  name="time" id="time">
+                            </td>
+                            <td>                              
+                              <select class="custom-select form-control col meetingTypeSelect" id="type" name="type">
+                              <option value"invalid_choice">Veuillez sélectionner le type de réunion</option>
+                              <option value"personnel">Personnel</option>
+                              <option value"projet">Relative à un projet</option>
+                            </select>
+                          </td>
+                            <td>                              
+                              <select class="custom-select form-control col d-none projectSelect" id="projet" name="projet">
+                              <option value"invalid_choice">Veuillez sélectionner un projet</option>
+                             <%if(projets.length>0){
+                               for(var i=0;i<projets.length;i++)
+                               {%>
+                                <option value="<%=projets[i]._id%>"><%=projets[i].titre%></option>
+                               <%}
+                             }%>
+                            </select></td>
+                            <td><button type="button" class="btn btn-outline-primary saveNewMeeting" onclick="saveNewMeeting()"><i class="bi bi-calendar-plus"></i></button></td>
+                          </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="card col-12 my-2 tasks-grid">
+              <div class="card-body">
+                <h5 class="card-title PageTitle">Aujourd'hui</h5>
+                <div class="table-responsive">
+                  <table class="table ">
+                    <thead>
+                          <th>#</th>
+                          <th>Titre de réunion</th>
+                          <th>Prévue à</th>
+                          <th>Type de réunion</th>
+                          <th>Statut</th>
+                          <th>Actions</th>
+                    </thead>
+                    <tbody>
+                      <%let counter=0;
+                      for(var i=0;i<meetings.length;i++)
+                      {
+                        let d1=new Date(meetings[i].dateMeeting).getDate()+'/'+new Date(meetings[i].dateMeeting).getMonth()+'/'+new Date(meetings[i].dateMeeting).getFullYear();
+                        let d2=(new Date()).getDate()+'/'+(new Date()).getMonth()+'/'+(new Date()).getFullYear();
+                        if(d1==d2){
+                          counter++;
+                        %>
+                        <tr>
+                            <td class="font-weight-bold"><%=counter%></td>
+                            <td><%=meetings[i].description%></td>
+                            <td class="PageTitle"><%=meetings[i].heureMeeting%></td>
+                            <td><%=meetings[i].type%>
+                            </td>
+                            <td class="<%if(meetings[i].statut=='En Attente'){%>text-warning<%}else{%>text-success<%}%>"><%=meetings[i].statut%></td>
+                            <td class="d-flex">
+                              <button type="button" class="btn btn-outline-danger  mx-1 <%if(data._id!=meetings[i].createurMeeting){%>d-none<%}%>" id="<%=meetings[i]._id%>" onclick="removeMeeting(event)">Supprimer <i class="bi bi-trash"></i></button>
+                                <button type="button" class="btn btn-outline-success mx-1 <%if(data._id!=meetings[i].createurMeeting){%>d-none<%}%>" id="<%=meetings[i]._id%>" onclick="terminateMeeting(event)">Terminer <i class="bi bi-check2-square"></i></button>
+                                <button type="button" class="btn btn-outline-primary mx-1" id="<%=meetings[i]._id%>" onclick="toggleModal('<%=meetings[i].description%>','<%=meetings[i].heureMeeting%>')">Inviter <i class="bi bi-send-plus"></i></button>
+                              </td>
+                          </tr>
+                      <%}}
+                      %>
+                      <%for(var j=0;j<respo.length;j++)
+                      {
+                        for(var k=0;k<respo[j].length;k++)
+                        {
+                          counter++;
+                        let d1=new Date(respo[j][k].dateMeeting).getDate()+'/'+new Date(respo[j][k].dateMeeting).getMonth()+'/'+new Date(respo[j][k].dateMeeting).getFullYear();
+                        let d2=(new Date()).getDate()+'/'+(new Date()).getMonth()+'/'+(new Date()).getFullYear();
+                        if(d1==d2){
+                        %>
+                        <tr>
+                            <td class="font-weight-bold"><%=counter%></td>
+                            <td><%=respo[j][k].description%></td>
+                            <td class="PageTitle"><%=respo[j][k].heureMeeting%></td>
+                            <td><%=respo[j][k].type%></td>
+                            <td class="<%if(respo[j][k].statut=='En Attente'){%>text-warning<%}else{%>text-success<%}%>"><%=respo[j][k].statut%></td>
+                            <td class="d-flex">
+                              <button type="button" class="btn btn-outline-danger  mx-1 <%if(data._id!=respo[j][k].createurMeeting){%>d-none<%}%>" id="<%=respo[j][k]._id%>" onclick="removeMeeting(event)">Supprimer <i class="bi bi-trash"></i></button>
+                                <button type="button" class="btn btn-outline-success mx-1 <%if(data._id!=respo[j][k].createurMeeting){%>d-none<%}%>" id="<%=respo[j][k]._id%>" onclick="terminateMeeting(event)">Terminer <i class="bi bi-check2-square"></i></button>
+                                <button type="button" class="btn btn-outline-primary mx-1" onclick="toggleModal('<%=respo[j][k].description%>','<%=respo[j][k].heureMeeting%>')">Inviter <i class="bi bi-send-plus"></i></button>
+                              </td>
+                          </tr>
+                      <%}}}
+                      %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            </div>
+          </section>
+          <!--First row end-->
+         
+         </div>
+          
+       </div>
+  </div>
+  <div class="modal fade" id="reg-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body  ">
+            <div class="row p-0 m-0 d-flex flex-column ">
+              <%for (var i=0;i<users.length;i++)
+              {%>
+                <div class="col d-flex user">
+                  <div class=" notificationImageContainer" style="background-image:url(<%=users[i].photo%>);background-size:contain;background-color:transparent;"></div>
+                  <div class="col d-flex justify-content-between">
+                     <div class=" py-2 mt-2" ><%=users[i].prenom%> <%=users[i].nom%></div>
+                  <div class=" py-2 m-0" ><button type="button"  class="btn btn-primary m-0" id="<%=users[i]._id%>" onclick="inviteToMeeting(event)">Inviter <i class="bi bi-person-plus" ></i></button></div>
+                  </div> 
+                 
+                </div>
+              <%}
+              %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+    <script src="/assets/js/navbar.js"></script>
+    <script src="/assets/js/meetingController.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+</body>
+</html>
