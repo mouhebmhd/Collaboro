@@ -1389,3 +1389,13 @@ exports.showDocumentation=(req,res)=>{
       res.render("login");
    }
 }
+exports.storyPointsEstimator=(req,res)=>{
+   if(checkAuthorization(req,res))
+   {
+      res.render('prediction',{data:jwt.decode(req.cookies['currentUser'],{complete:true}).payload.user});
+   }
+   else
+   {
+      res.render("login");
+   }
+}

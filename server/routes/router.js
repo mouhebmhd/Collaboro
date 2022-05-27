@@ -72,6 +72,10 @@ route.get('/project/byCategory/:id',worker.projectByCategory);
 route.get('/tasks/countForUser/:id',worker.countTasksForUser);
 //this api is used  to load the list of projects of an user
 route.get('/user/projects/:id',worker.userProjects)
+//this api is used to get the list of synonyms of a word
+route.get('/words/getSynonyms/:word',worker.getSynonyms)
+//this api is used to get the list of similarities of a given text 
+route.get('/similarities/getSimilarities/:sentence',worker.getSimilarities)
 
 /***********************************GET APIS********************************************/
 //GET APIS ARE USED TO LOG SOME PAGEs OR DATA,BUT NOT TO UPDATE ,DELETE OR INSERT DATA TO AND FROM THE DATABASE 
@@ -158,6 +162,8 @@ route.get('/corbeille/',services.deletedInMails);
 route.get('/documentation',services.showDocumentation);
 //this api is used to log the error page when the status is equal to 500
 route.get('/error500',services.error500);
+//this api is used to render the page where users can estimate the duration of an user story
+route.get('/userStories/estimator',services.storyPointsEstimator);
 //default router,is used to log 404 page not found whene entering unexpected url in the browser
 route.get('*',services.error404);
 

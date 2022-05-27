@@ -1,99 +1,78 @@
-function fibonacciNumber(position)
+var yValues=[];
+var modelResult=0;
+function estimateStoryPoints()
 {
-    if(position<=0)
+    var description=document.getElementById('usDescription').value;
+    while(description.charAt(description.length-1)==' ')
     {
-        return 0;
+        description=description.substr(0,description.length-2)
     }
-    else if(position==1)
+    while(description.charAt(0)==' ')
     {
-        return 1;
+        description=description.substr(1,description.length-1)
     }
-    else
+    while(description.indexOf('  ')>-1)
     {
-    let a=0;
-    let b=1;
-    for(var i=0;i<position;i++)
-    {
-        c=a+b;
-        a=b;
-        b=c;
+        description=description.replace('  ',' ');
     }
-    return c;
-    }
-}
-function itemFrequency(item,doc)
-{
-    let itemFrequencyResult=0;
-    let notEmptyElements=0;
-    doc.trim();
-    doc=doc.replace('...',' ');
-    doc=doc.replace('.',' ');
-    doc=doc.replace(',',' ');
-    doc=doc.replace('é','e');
-    doc=doc.replace('à','a');
-    doc=doc.replace('è','e');
-    doc=doc.replace('c','ç');
-    doc=doc.replace('!',' ');
-    doc=doc.replace('-',' ');
-    doc=doc.replace('_',' ');
-    doc=doc.replace('?',' ');
-    doc=doc.replace(';',' ');
-    let list=doc.split(' ');
-    for(var i=0;i<list.length;i++)
-    {
-        if(list[i].indexOf(item)!=-1)
+    $.ajax({
+        'url':'http://localhost:8080/similarities/getSimilarities/'+$.param({description}),
+        'method':'GET',
+    }).then(function(response){
+        modelResult=response.sentenceSimilarity;
+        document.getElementById('charCount').textContent=description.length;
+        if(description.length==0)
         {
-            itemFrequencyResult+=1;
+            document.getElementById('wordCount').textContent=0;
         }
-        if(list[i]!=' ')
+        else
         {
-            notEmptyElements+=1;
+            document.getElementById('wordCount').textContent=description.split(' ').length;
         }
-    }
-    
-    return itemFrequencyResult/notEmptyElements;
-}
-function inverseDocumentFrequency(item,docs)
-{
-    let idf=0;
-    for(var i=0;i<docs.length;i++)
-    {
-        if(itemFrequency(item,docs[i])>0)
+        document.getElementById('dataSetSize').textContent=response.similarities.length;
+        document.getElementsByClassName('maxSimilarity')[0].textContent=((response.maxSimilarity*100).toString()).substring(0,4)+'%';
+        document.getElementsByClassName('minSimilarity')[0].textContent=((response.minSimilarity*100).toString()).substring(0,4)+'%';
+        document.getElementById('similarityAverage').textContent=((response.averageSimilarity*100).toString()).substring(0,4)+'%';
+        yValues=response.similarities;
+        var xValues = [];
+        for(var i=1;i<=487;i++)
         {
-            idf+=1;
+            xValues.push(i);
         }
-    }
-    return Math.log(idf/docs.length);
-}
-function splitSentenceiIntoWords(doc)
-{
-    doc=doc.replace('...',' ');
-    doc=doc.replace('.',' ');
-    doc=doc.replace('_',' ');
-    doc=doc.replace(',',' ');
-    doc=doc.replace('!',' ');
-    doc=doc.replace('?',' ');
-    doc=doc.replace('-',' ');
-    doc=doc.replace(';',' ');
-    let list=doc.split(' '); 
-    let result=[];
-    for(var i=0;i<list.length;i++)
-    {
-        if(list[i]!='')
+        for(var i=0;i<486;i++)
         {
-            result.push(list[i]);
+            yValues[i]*=100;
         }
-    }
-    return result;
+        new Chart("myChart1", {
+            type: "scatter",
+            data: {
+            labels: xValues,
+            datasets: [{
+            label:"Similarités des points dans le dataset",
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "#4B49AC",
+                borderColor: "rgba(0,0,255,0.1)",
+                data: yValues
+            },
+            {
+                label:"Similarité de la nouvelle description",
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "#02D1A6",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    data: [modelResult]            
+                }
+            ]
+            },
+            options: {
+            legend: {display: false},
+            responsive:true,
+            maintainAspectRatio: false,
+          
+            }
+        });
+
+
+    })
 }
-//Forming the dataset 
-//Features are : teamStrength,localOrRemote,tf-idf,declaredissues,declaredRisks,
-//Labels are : user story points
-function wordCount(doc)
-{
-let list=splitSentenceiIntoWords(doc);
-return list.length;
-}
-//Forming the dataset 
-//Features are : teamStrength,localOrRemote,tf-idf,declaredissues,declaredRisks,
-//Labels are : user story points

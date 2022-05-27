@@ -1459,19 +1459,19 @@ opacity:1;
 {
   font-size: 30px;
 }
-.asPO
+.asPO,#charCount
 {
   color: #4B49AC;
 }
-.asSM
+.asSM,#wordCount
 {
   color: #02D1A6; 
 }
-.asDEV
+.asDEV,#dataSetSize
 {
   color: #00B5C1;
 }
-.asSH
+.asSH,#similarityAverage
 {
   color: #FFD07E;
 }

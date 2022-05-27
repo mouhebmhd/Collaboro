@@ -25,6 +25,8 @@ const { response } = require("express");
 const { Promise } = require("bluebird");
 const projet = require("../model/projet");
 const { pt } = require("translate-google/languages");
+const Reverso=require('reverso-api');
+const reverso=new Reverso();
 mongoose.Promise = require('bluebird');
 require("dotenv").config();
 
@@ -706,3 +708,53 @@ exports.userProjects=(req,res)=>{
 		  });
 	})
 }
+exports.getSynonyms=(req,res)=>{
+	reverso.getSynonyms(req.params.word, 'English', (response) => {
+		res.send(response);
+	}).catch((err) => {
+		res.send(err);
+	});
+}
+exports.getSimilarities=(req,res)=>{
+	var dataset=require('../../assets/js/dataset')
+	var stories=dataset.dataset;
+	var sentence=req.params.sentence;
+	var model=require('../../assets/js/model');
+	sentence=model.toLowerCase(sentence);
+	sentence=model.tokenization(sentence);
+	sentence=model.stopWordsRemover(sentence);
+  var xs=[];
+	stories.forEach(story=>{
+        story.description=model.stopWordsRemover(story.description);
+        xs.push(story.storyPoints);
+    });
+    dataset.dictionary=model.stopWordsRemover(dataset.dictionary);
+	for(var i=0;i<sentence.length;i++)
+    {
+        sentence[i]=model.lemmatize(sentence[i]);
+        sentence[i]=model.stemming(sentence[i]);
+    }
+	stories.forEach(story=>{
+        var temp=[];
+        for(var i=0;i<dataset.dictionary.length;i++)
+        {
+            temp.push(story.description.filter(element=>element==dataset.dictionary[i]).length)
+        }
+        story.vector=temp;
+    });
+    var sentenceVector=[];
+        for(var i=0;i<dataset.dictionary.length;i++)
+        {
+            sentenceVector.push(sentence.filter(element=>element==dataset.dictionary[i]).length)
+        }
+        var temporar=[];
+        for(var i=0;i<stories.length;i++)
+        {
+            temporar.push(model.cosineSimilarity(sentenceVector,stories[i].vector));
+        }
+		var minSimilarity=Math.min.apply(Math,temporar);
+		var maxSimilarity=Math.max.apply(Math,temporar);
+		var averageSimilarity=temporar.reduce((a,b)=>a+b,0);
+        var result={sentence:sentence,maxSimilarity,minSimilarity,similarities:temporar,xs,averageSimilarity:(averageSimilarity/temporar.length)};
+		res.send(result);
+	}

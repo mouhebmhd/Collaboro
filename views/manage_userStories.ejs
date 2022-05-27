@@ -177,6 +177,7 @@
                 </div>  
                 <div class="col-md-6 col-sm-12 d-flex justify-content-end">
                   <button type="button" class="btn btn-primary mr-2 text-light <%=isPo%>" onclick="createNewUserStory()">Nouvelle User Story<i class="bi bi-plus "></i></button>      
+                  <a type="button" class="btn btn-danger mr-2 text-light <%=isPo%>" href="/userStories/estimator">Estimer les Story Points<i class="bi bi-clock-history "></i></a>      
                   <button type="button" class="btn btn-warning text-light mr-2 <%=isPo%>" onclick="toggleModification()" id="modifyUserStories">Modifier<i class="bi bi-list-ol ml-2 "></i></button>
                   <a   class="btn btn-info p-2" href="/project/showProductBacklog/<%=projet._id%>">Product Backlog<i class="bi bi-layers ml-2 "></i></a>
                 </div>
