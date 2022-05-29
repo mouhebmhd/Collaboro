@@ -71,11 +71,22 @@ route.get('/project/byCategory/:id',worker.projectByCategory);
 //this api is used to load the number of tasks affected to a specific user
 route.get('/tasks/countForUser/:id',worker.countTasksForUser);
 //this api is used  to load the list of projects of an user
-route.get('/user/projects/:id',worker.userProjects)
+route.get('/user/projects/:id',worker.userProjects);
 //this api is used to get the list of synonyms of a word
-route.get('/words/getSynonyms/:word',worker.getSynonyms)
+route.get('/words/getSynonyms/:word',worker.getSynonyms);
+//this api is used to load the dataset
+route.get('/stories/loadDataSet',worker.loadDataSet);
+//this api is used to load the dictionary
+route.get('/data/loadDictionary',worker.loadDictionary);
+//this api is used to check if two word are similar
+route.get('/similarities/isSimilarTo/:word1/:word2',worker.isSimilarTo);
 //this api is used to get the list of similarities of a given text 
-route.get('/similarities/getSimilarities/:sentence',worker.getSimilarities)
+route.get('/similarities/getSimilarity/:sentence',worker.getSimilarity);
+//this api is used to measure all similarities of the documents of our dataset
+route.get('/similarity/measureAllSimilarities/',worker.measureSimilarities);
+
+
+
 
 /***********************************GET APIS********************************************/
 //GET APIS ARE USED TO LOG SOME PAGEs OR DATA,BUT NOT TO UPDATE ,DELETE OR INSERT DATA TO AND FROM THE DATABASE 

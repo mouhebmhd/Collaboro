@@ -16,25 +16,13 @@ function estimateStoryPoints()
         description=description.replace('  ',' ');
     }
     $.ajax({
-        'url':'http://localhost:8080/similarities/getSimilarities/'+$.param({description}),
-        'method':'GET',
-    }).then(function(response){
-        modelResult=response.sentenceSimilarity;
-        document.getElementById('charCount').textContent=description.length;
-        if(description.length==0)
-        {
-            document.getElementById('wordCount').textContent=0;
-        }
-        else
-        {
-            document.getElementById('wordCount').textContent=description.split(' ').length;
-        }
-        document.getElementById('dataSetSize').textContent=response.similarities.length;
-        document.getElementsByClassName('maxSimilarity')[0].textContent=((response.maxSimilarity*100).toString()).substring(0,4)+'%';
-        document.getElementsByClassName('minSimilarity')[0].textContent=((response.minSimilarity*100).toString()).substring(0,4)+'%';
-        document.getElementById('similarityAverage').textContent=((response.averageSimilarity*100).toString()).substring(0,4)+'%';
-        yValues=response.similarities;
-        var xValues = [];
+        'url':'http://localhost:8080/similarities/getSimilarities/'+$.param({sentence:description.toString()}),
+        'method':'GET'
+    })
+    .done(function(response){
+        alert(response);
+    })
+          /*  var xValues = [];
         for(var i=1;i<=487;i++)
         {
             xValues.push(i);
@@ -71,8 +59,5 @@ function estimateStoryPoints()
             maintainAspectRatio: false,
           
             }
-        });
-
-
-    })
+        });*/
 }

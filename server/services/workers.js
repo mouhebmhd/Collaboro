@@ -23,10 +23,13 @@ const { startSession, exists, countDocuments } = require("../model/utilisateur")
 const { parse } = require("path");
 const { response } = require("express");
 const { Promise } = require("bluebird");
+const Json=require('json')
 const projet = require("../model/projet");
+const synonym=require('../model/synonym');
+const story = require("../model/story");
 const { pt } = require("translate-google/languages");
-const Reverso=require('reverso-api');
-const reverso=new Reverso();
+const { WordNet } = require("natural");
+var model=require('./model')
 mongoose.Promise = require('bluebird');
 require("dotenv").config();
 
@@ -708,53 +711,130 @@ exports.userProjects=(req,res)=>{
 		  });
 	})
 }
-exports.getSynonyms=(req,res)=>{
-	reverso.getSynonyms(req.params.word, 'English', (response) => {
-		res.send(response);
-	}).catch((err) => {
-		res.send(err);
-	});
+exports.getSynonyms= (req,res)=>{
+
+	res.send(getSynonyms(req.params.word));
 }
-exports.getSimilarities=(req,res)=>{
-	var dataset=require('../../assets/js/dataset')
-	var stories=dataset.dataset;
-	var sentence=req.params.sentence;
-	var model=require('../../assets/js/model');
-	sentence=model.toLowerCase(sentence);
-	sentence=model.tokenization(sentence);
-	sentence=model.stopWordsRemover(sentence);
-  var xs=[];
-	stories.forEach(story=>{
-        story.description=model.stopWordsRemover(story.description);
-        xs.push(story.storyPoints);
-    });
-    dataset.dictionary=model.stopWordsRemover(dataset.dictionary);
-	for(var i=0;i<sentence.length;i++)
-    {
-        sentence[i]=model.lemmatize(sentence[i]);
-        sentence[i]=model.stemming(sentence[i]);
-    }
-	stories.forEach(story=>{
-        var temp=[];
-        for(var i=0;i<dataset.dictionary.length;i++)
-        {
-            temp.push(story.description.filter(element=>element==dataset.dictionary[i]).length)
-        }
-        story.vector=temp;
-    });
-    var sentenceVector=[];
-        for(var i=0;i<dataset.dictionary.length;i++)
-        {
-            sentenceVector.push(sentence.filter(element=>element==dataset.dictionary[i]).length)
-        }
-        var temporar=[];
-        for(var i=0;i<stories.length;i++)
-        {
-            temporar.push(model.cosineSimilarity(sentenceVector,stories[i].vector));
-        }
-		var minSimilarity=Math.min.apply(Math,temporar);
-		var maxSimilarity=Math.max.apply(Math,temporar);
-		var averageSimilarity=temporar.reduce((a,b)=>a+b,0);
-        var result={sentence:sentence,maxSimilarity,minSimilarity,similarities:temporar,xs,averageSimilarity:(averageSimilarity/temporar.length)};
-		res.send(result);
+function getSynonyms(word)
+{
+var model=require('./model');
+word=word.replace(':','');
+word=model.toLowerCase(word);
+word=model.lemmatize(word);
+let stemmedWord =model.stemming(word);
+let synonymsVector=[];
+	let synonyms=require('../../assets/js/synonyms');
+	for(var i=0;i<synonyms.length;i++)
+	{
+		if((synonyms[i].lemma).indexOf(word)>=0)
+		{
+			let synos=synonyms[i].synonyms.split(';');
+			for(var k=0;k<synos.length;k++)
+			{
+				if(synonymsVector.indexOf(synos[k])==-1)
+				{
+					synonymsVector.push(synos[k])
+				}
+			}
+		}
 	}
+	return(synonymsVector);
+}
+function loadDataSet()
+{
+let dataset=require('../../assets/js/stories');
+res.send(dataset);
+}
+exports.loadDataSet= (req,res)=>{
+res.send(loadDataSet());
+}
+exports.isSimilarTo= (req,res)=>
+{
+	let model=require('./model');
+	let word1=req.params.word1;
+	word1=model.lemmatize(word1);
+	word1=model.stemming(word1);
+	let word2=req.params.word2;
+	word2=model.lemmatize(word2);
+	word2=model.stemming(word2);
+	let synos=getSynonyms(word1);
+		let exist;
+		exist=synos.filter(element=>element.indexOf(word2)>=0);
+		res.send(exist.length>0);
+}
+exports.loadDictionary=(req,res)=>{
+	let stories=require('../../assets/js/stories');
+		var dictionary=[];
+		for(var i=0;i<stories.length;i++)
+		{
+			var storyVector=model.toLowerCase(stories[i].description);
+			 storyVector=model.tokenization(stories[i].description);
+			 storyVector=model.stopWordsRemover(storyVector);
+			 for(var j=0;j<storyVector.length;j++)
+			 {
+				 let word=model.lemmatize(storyVector[j]);
+				 word=model.stemming(word);
+				 if(dictionary.indexOf(word)==-1)
+				 {
+					 word=model.toLowerCase(word);
+					 word=model.lemmatize(word);
+					 word=model.stemming(word);
+					 dictionary.push(word);
+				 }
+			 }
+		}
+		res.send(dictionary);
+}
+exports.getSimilarity= (req,res)=>{
+	var sentence=req.params.sentence;
+	var dictionaryVector=[];
+	sentence=model.toLowerCase(sentence);
+	let sentenceVector=model.tokenization(sentence);
+	sentenceVector=model.stopWordsRemover(sentenceVector);
+	for(var i=0;i<sentenceVector.length;i++)
+	{
+		sentenceVector[i]=model.lemmatize(sentenceVector[i]);
+		sentenceVector[i]=model.stemming(sentenceVector[i]);
+	}		
+	let similarityVector=[];
+	let similaritiesVector=[];
+		var storyVector=[];
+		var tempo;
+		let stories=require('../../assets/js/stories');
+		//for every user story we calculate how similar is it with the given user story description
+		for (var i=0;i<stories.length;i++)
+		{				
+			similarityVector=[];
+			 storyVector=stories[i].vector;	
+			 for(var counter=0;counter<storyVector.length;counter++)
+			 {				
+				 tempo=0;
+				 for(var counter1=0;counter1<sentenceVector.length;counter1++)
+				 {
+					if(model.isSimilarTo(sentenceVector[counter1],storyVector[counter])==true)
+					{
+						tempo++;
+					}
+				 }
+			 similarityVector.push(tempo);
+		}
+			similaritiesVector.push(model.cosineSimilarity(similarityVector,model.calculateOwnVector(sentenceVector)));		
+	}
+		res.send(similaritiesVector);
+}
+exports.measureSimilarities=(req,res)=>{
+	let measures=[];
+	let promises=[];
+	axios.get('http://localhost:8080/stories/loadDataSet')
+	.then(function(stories){
+		 stories=stories.data;
+		for(var i=0;i<stories.length;i++)
+		{
+			promises.push(axios.get('http://localhost:8080/similarities/getSimilarity/'+stories[i].description)
+			.then(result=>{
+			measures.push(Math.random());
+		}));
+	}	
+	Promise.all(promises).then(() => res.send(measures));
+	})
+}
