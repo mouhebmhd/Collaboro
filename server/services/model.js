@@ -131,10 +131,10 @@ model.isSimilarTo= function(word1,word2)
 	word1=model.stemming(word1);
 	word2=model.lemmatize(word2);
 	word2=model.stemming(word2);
-	let synos=getSynonyms(word1);
+	/*let synos=getSynonyms(word1);
 		let exist;
-		exist=synos.filter(element=>element.indexOf(word2)>=0);
-		return(exist.length>0 );
+		exist=synos.filter(element=>element.indexOf(word2)>=0);*/
+		return(word2==word1);
     
 }
 model.measureSimilarity=function(storyVector,dictionary){
@@ -177,5 +177,99 @@ model.calculateOwnVector=function(vector)
         ownVector.push(temp);
     }
     return ownVector;
+}
+model.convertToBinary=function(digit)
+{
+let result='';
+while(digit!=0)
+{
+    result=((digit%2).toString())+result;
+    digit=Math.floor(digit/2);
+}
+return result;
+}
+model.hammingDistance=function(vector1,vector2)
+{
+let result=0;
+if(vector1.length<vector2.length)
+{
+    while(vector1.length<vector2.length)
+    {
+        vector1='0'+vector1;
+    }
+}
+if(vector1.length>vector2.length)
+{
+    while(vector1.length>vector2.length)
+    {
+        vector2='0'+vector2;
+    }
+}
+for(var i=0;i<vector1.length;i++)
+{
+    if((vector1[i]!=vector2[i]))
+    {
+    result++;
+    }
+}
+return (result);
+}
+function compare( a, b ) {
+    if ( a.similarity> b.similarity){
+      return -1;
+    }
+    else if ( a.similarity > b.similarity ){
+      return 1;
+    }
+    return 0;
+  }
+function compare1( b, a ) {
+    if ( a.similarity> b.similarity){
+      return -1;
+    }
+    else if ( a.similarity > b.similarity ){
+      return 1;
+    }
+    return 0;
+}
+model.predictWithDecisionTreeKNN=function(objet,k)
+{
+let objectToPredict=objet.objectToPredict;
+let dataset=objet.dataset;
+if(objectToPredict.teamStatus=='local')
+{
+    objectToPredict.teamStatus=1;
+}
+else
+{
+    objectToPredict.teamStatus=0;
+}
+for(var i=0;i<dataset.length;i++)
+{
+    if(dataset[i].teamStatus==objectToPredict.teamStatus)
+    {
+        dataset[i].teamStatus=objectToPredict.teamStatus;
+    }
+    else
+    {
+        if(objectToPredict.teamStatus==1)
+        {
+            dataset[i].teamStatus=0;
+        }
+        else
+        {
+            dataset[i].teamStatus=1;
+        }
+    }
+}
+  dataset=dataset.sort(compare);
+  let finalResult=[];
+  let binaryRequest=model.convertToBinary((objectToPredict.similarity*10000).toFixed(0)+objectToPredict.teamStatus+objectToPredict.teamStrength);
+  for(var i=0;i<dataset.length;i++)
+  {
+    finalResult.push(model.hammingDistance((model.convertToBinary((dataset[i].similarity*10000).toFixed(0)+dataset[i].teamStatus+dataset[i].teamStrength)),binaryRequest))
+  }
+  finalResult=finalResult.sort(compare1);
+  return(finalResult);
 }
 module.exports=model;

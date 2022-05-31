@@ -204,14 +204,6 @@
                   </div>
                   <div class="form-group row mt-0">
                     <div class="col-sm-12 ">
-                      <label for="name" class="font-weight-bold">Date Fin</label>
-                    </div>
-                    <div class="col-sm-12 m-auto">
-                      <%=projet.DateFin%>
-                    </div>
-                  </div>      
-                  <div class="form-group row mt-0">
-                    <div class="col-sm-12 ">
                       <label for="name" class="font-weight-bold">Description</label>
                     </div>
                     <div class="col-sm-12 m-auto">
@@ -280,16 +272,16 @@
                           <%}%>
                       <div class="col-12  my-1 d-flex   p-0 " style="height:max-content;">
                         <div class="col-4  m-1 bg-white projectInfosContainer " style="height:max-content;">
-                          <div class="iconContainerStats d-flex justify-content-center align-items-center"><i class="bi bi-stopwatch "></i></div>
-                          <div class="  text-center font-weight-bold ">Temps Travaillé</div>
-                          <div class="  text-center ">jours-mois-années</div>
+                          <div class="iconContainerStats d-flex justify-content-center align-items-center"><i class="bi bi-calendar "></i></div>
+                          <div class="  text-center font-weight-bold ">Date Fin</div>
+                          <div class="  text-center "><%=projet.DateFin%></div>
                           </div>
                       <div class="col bg-white projectInfosContainer my-1 p-1" style="height:max-content;">
-                        <div class=" productOwnerText text-center font-weight-bold ">Progression</div>
-                          <div class="progress mt-5 mb-4 ">
-                            <div class="progress-bar  progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                        <div class=" productOwnerText text-center font-weight-bold ">Statut du projet</div>
+                        <p class="h5 PageTitle text-center mb-2 text-success">Terminé avec succés</p>
+                          <div class="progress mt-3 ">
+                            <div class="progress-bar  progress-bar-striped " role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
                           </div>  
-                          <p class="text-center font-weight-normal">100% Terminé</p> 
                        </div>
                       </div>
                       <div class="col-12  my-1 d-flex   p-0 " style="height:max-content;">

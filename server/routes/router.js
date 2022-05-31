@@ -4,6 +4,8 @@ const services =require('../services/render');
 const controller=require('../controller/controller');
 const worker=require("../services/workers");
 const { Router } = require('express');
+
+
 /* WORKERS ARE GET APIS WHO ARE USED TO RETRIEVE A SPECIFIC DATA SUCH A DATE,TIME OR WEATHER INFOS,OR SOMETIMES TO GET A SPECIFIC DATA to be used by another API */
 
 //for this api we give the project id as input and we got the project infos as input
@@ -87,9 +89,9 @@ route.get('/similarity/measureAllSimilarities/',worker.measureSimilarities);
 
 
 
-
 /***********************************GET APIS********************************************/
 //GET APIS ARE USED TO LOG SOME PAGEs OR DATA,BUT NOT TO UPDATE ,DELETE OR INSERT DATA TO AND FROM THE DATABASE 
+
 
 //those two apis  are used to show the index page
 route.get('/', services.homeRouter);

@@ -217,8 +217,8 @@
                   <div class="col-auto notificationImageContainer d-flex justify-content-center align-items-center h4"><i class="bi bi-envelope text-light"></i></div>
                   <div class="col d-flex justify-content-between">
                      <div class="inmail" >
-                      <a type="button" href="#" onclick="showEmail('<%=inmails[i]._id%>','<%=inmails[i].identifiantEmetteur%>','<%=inmails[i].objet%>','<%=inmails[i].contenu%>','<%=inmails[i].dateEnvoi%>')" class="showEmailLink" >
-                       <p class="text-dark font-weight-bold m-0" ><%=inmails[i].identifiantEmetteur%></p>
+                      <a type="button" href="#" onclick="showEmail1('<%=inmails[i]._id%>','<%=inmails[i].identifiantEmetteur%>','<%=inmails[i].identifiantRecepteur%>','<%=inmails[i].objet%>','<%=inmails[i].contenu%>','<%=inmails[i].dateEnvoi%>')" class="showEmailLink" >
+                       <p class="text-dark font-weight-bold m-0" ><%=inmails[i].identifiantRecepteur%></p>
                        <p class="text-dark m-0"><%=inmails[i].contenu.substr(0,40)%>...</p></a>
                       </div>
                   </div> 
@@ -235,16 +235,16 @@
               <div class="row emailDetails p-2 d-none">
                 <div class="col-12 p-2 d-flex">
                   <button type="button" class="btn btn-outline-danger  mx-1 deleteEmail" onclick="deleteEmail1(event)">Supprimer pour vous<i class="bi bi-trash ml-2"></i></button>
-                  <button type="button" class="btn btn-outline-info  mx-1 replyEmail" onclick="replyEmail(event)">Répondre<i class="bi bi-reply-all ml-2"></i></button>
                   <button type="button" class="btn btn-outline-secondary  mx-1 transferEmail" onclick="transferEmail(event)">Transférer<i class="bi bi-reply ml-2"></i></button>
                 </div>
                   <div class="row">
                     <div class="col">
-                      <p class="font-weight-bold">De la part de <span class="PageTitle h6" id="email">emailnhhjezbhed</span>,</p>
+                      <p class="font-weight-bold">De la part de  <span class="PageTitle h6" id="email"></span>,</p>
+                      <p class="font-weight-bold">Destinataire <span class="PageTitle h6" id="destination"></span>,</p>
                       <p class="font-weight-bold">Concernant <span class="PageTitle h6" id="sujet">Sujet</span>,</p>
                       <p class="font-weight-bold">Corps de message </p>
                       <p id="message">Corps de message </p>
-                      <p class="font-weight-bold">Cordialement, <span class="PageTitle h6" id="date">emailnhhjezbhed</span>,</p>
+                      <p class="font-weight-bold">Cordialement, <span class="PageTitle h6" id="date"></span>,</p>
                     </div>
                   </div>
               </div>

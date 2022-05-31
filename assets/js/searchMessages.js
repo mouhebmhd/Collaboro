@@ -124,3 +124,27 @@ function replyEmail(event)
     $('#reg-modal').modal('show');
 
 }
+function showEmail1(id,email,destination,objet,contenu,date)
+{
+    let  months=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Décembre'];
+    document.getElementsByClassName("showEmailContainer")[0].style.backgroundImage="none";
+    document.getElementsByClassName("emailDetails")[0].classList.remove("d-none");
+    document.getElementById("email").textContent=email;
+    document.getElementById("destination").textContent=destination;
+    document.getElementById("sujet").textContent=objet;
+    document.getElementById("message").textContent=contenu;
+    document.getElementById("date").textContent='Envoyé le '+(new Date(date)).getDate()+' '+months[(new Date(date)).getMonth()]+' '+(new Date(date)).getFullYear();
+    document.getElementsByClassName("deleteEmail")[0].id=id;
+    document.getElementsByClassName("replyEmail")[0].id=email;
+    $.ajax({
+        'url':'/api/inmails/seenUpdate/'+$.param({id}),
+        'method':'put'
+    })
+    .done(function(response){
+        if(response!="updated")
+        {
+            location.assign(response);
+        }
+    })
+
+}

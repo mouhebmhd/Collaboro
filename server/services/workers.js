@@ -11,6 +11,7 @@ const risk=require("../model/risk");
 const formation=require("../model/formation");
 const stakeholder=require("../model/stakeholders");
 const weather=require('weather-js');
+const util=require('util');
 var mongoose = require('mongoose');
 const meeting=require("../model/meeting");
 const obstacle=require('../model/obstacle');
@@ -29,7 +30,8 @@ const synonym=require('../model/synonym');
 const story = require("../model/story");
 const { pt } = require("translate-google/languages");
 const { WordNet } = require("natural");
-var model=require('./model')
+var model=require('./model');
+const { isNullOrUndefined } = require("util");
 mongoose.Promise = require('bluebird');
 require("dotenv").config();
 
@@ -791,6 +793,7 @@ exports.getSimilarity= (req,res)=>{
 	sentence=model.toLowerCase(sentence);
 	let sentenceVector=model.tokenization(sentence);
 	sentenceVector=model.stopWordsRemover(sentenceVector);
+	var stories=require('../../assets/js/stories');
 	for(var i=0;i<sentenceVector.length;i++)
 	{
 		sentenceVector[i]=model.lemmatize(sentenceVector[i]);
@@ -800,7 +803,7 @@ exports.getSimilarity= (req,res)=>{
 	let similaritiesVector=[];
 		var storyVector=[];
 		var tempo;
-		let stories=require('../../assets/js/stories');
+		
 		//for every user story we calculate how similar is it with the given user story description
 		for (var i=0;i<stories.length;i++)
 		{				
@@ -818,10 +821,45 @@ exports.getSimilarity= (req,res)=>{
 				 }
 			 similarityVector.push(tempo);
 		}
-			similaritiesVector.push(model.cosineSimilarity(similarityVector,model.calculateOwnVector(sentenceVector)));		
+			similaritiesVector.push(model.cosineSimilarity(similarityVector,model.calculateOwnVector(sentenceVector)));
+					
 	}
-		res.send(similaritiesVector);
+	let maxSimilarity=Math.max.apply(similaritiesVector);
+	let minSimilarity=0;
+	let avgSimilarity=0;
+	for(var i=0;i<similaritiesVector.length;i++)
+	{
+		if((similaritiesVector[i]>maxSimilarity) && (similaritiesVector[i]!=Infinity))
+		{
+			maxSimilarity=similaritiesVector[i];
+		}
+		if((similaritiesVector[i]<minSimilarity) && (similaritiesVector[i]!=Infinity))
+		{
+			minSimilarity=similaritiesVector[i];
+		}
+	}
+	let teamStatus='local';
+	let teamStrength=6;
+		let objectToPredict={similarity:maxSimilarity,teamStrength:5,teamStatus:'local'};
+		let dataset=[];
+		for(var i=0;i<stories.length;i++)
+		{
+			if((similaritiesVector[i]>=0)&&(similaritiesVector[i]<=1))
+			{
+				dataset.push({similarity:similaritiesVector[i],teamStrength:parseInt(stories[i].teamStrength),teamStatus:stories[i].teamStatus});
+			}
+			else
+			{
+				dataset.push({similarity:0,teamStrength:parseInt(stories[i].teamStrength),teamStatus:stories[i].teamStatus});
+			}
+			
+		}
+	res.send(model.predictWithDecisionTreeKNN({objectToPredict,dataset},5));
+		
 }
+
+
+
 exports.measureSimilarities=(req,res)=>{
 	let measures=[];
 	let promises=[];
