@@ -243,7 +243,7 @@
                               <td><%=j+1%></td>
                               <td><%=tasks[j].description%></td>
                               <td class="text-warning">En cours</td>
-                              <td>date debut</td>
+                              <td><%=tasks[j].dateDebut%></td>
                               <td><%=tasks[j].estimation%></td>
                               <td>
                                 <a  type="button" class="btn btn-outline-danger delete-task-button text-danger " id="<%=tasks[j]._id%>" onclick="abandonTask(event)"><i class="bi bi-trash"></i></a>

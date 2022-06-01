@@ -1,5 +1,7 @@
 
 var yValues=[];
+var yValues2=[];
+var yValues3=[];
 var modelResult=0;
 function WordCount(str) {
     return str.split(' ').length;
@@ -49,7 +51,7 @@ function estimateStoryPoints()
         let minSimilarity=response.similarities[0].similarity;
         let averageSimilarity=0;
         var yValues1 = [];
-        for(var i=0;i<=response.similarities.length;i++)
+        for(var i=0;i<=response.similarities.length+1;i++)
         {
             xValues.push(i);
         }
@@ -69,18 +71,23 @@ function estimateStoryPoints()
         document.getElementsByClassName('minSimilarity')[0].textContent=((minSimilarity*100).toFixed(2)).toString()+'%';
         document.getElementById('similarityAverage').textContent=(((averageSimilarity/respo.similarities.length)*100).toFixed(2)).toString()+'%';
         document.getElementsByClassName('result')[0].textContent="Story de classe "+respo.minimumClass;
+        document.getElementById('knnChart').classList.remove('d-none');
+        document.getElementById('knnChart1').classList.remove('d-none');
         for(var i=0;i<response.similarities.length;i++)
         {
             if(response.minimumOnes.indexOf(i)==-1)
             {
                 yValues[i]=response.similarities[i].similarity;
+                yValues2.push(response.similarities[i].teamStrength)
             }
             else
             {
                 yValues1.push(response.similarities[i].similarity);
+                yValues3.push(response.similarities[i].teamStrength);
+
             }
         }
-                 new Chart("myChart3", {
+            new Chart("myChart3", {
             type: "scatter",
             data: {
             labels: xValues,
@@ -99,7 +106,52 @@ function estimateStoryPoints()
                     backgroundColor: "#02D1A6",
                     borderColor: "rgba(0,0,255,0.1)",
                     data: yValues1           
-                }
+                },
+                {
+                    label:"Emplacement du stories Fournie",
+                        fill: false,
+                        lineTension: 0,
+                        backgroundColor: "#00B5C1",
+                        borderColor: "rgba(0,0,255,0.1)",
+                        data: [parseFloat(respo.objectToPredict.similarity )  ]        
+                    }
+            ]
+            },
+            options: {
+            legend: {display: false},
+            responsive:true,
+            maintainAspectRatio: false,
+          
+            }
+        });
+        new Chart("myChart4", {
+            type: "scatter",
+            data: {
+            labels: xValues,
+            datasets: [{
+            label:"Les stories du dataset selon la taille de l'équipe",
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "#ffd07e",
+                borderColor: "rgba(0,0,255,0.1)",
+                data: yValues2
+            },
+            {
+                label:"Les stories les plus proches selon la taille  de l'équipe",
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgba(255,255,255,0.1)",
+                    borderColor: "#02D1A6",
+                    data: yValues3           
+                },
+                {
+                    label:"L'emplacement de la nouvelle point selon la taille  l'équipe",
+                        fill: false,
+                        lineTension: 0,
+                        backgroundColor: "#00B5C1",
+                        borderColor: "#00B5C1",
+                        data: [parseFloat(respo.objectToPredict.teamStrength)]           
+                    }
             ]
             },
             options: {

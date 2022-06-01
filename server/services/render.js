@@ -996,7 +996,7 @@ exports.launchSprint = (req, res) => {
                                  let noti = new notification({
                                     recepteur: developer.identifiantMembre,
                                     dateEnvoie: Date.now().toString(),
-                                    contenu: 'Vous Avez une nouvelle sprint qui a été declenché.Veuillez consulter la liste de vos tâches afin de savoir vos nouvellestâches'
+                                    contenu: 'Vous Avez une nouvelle sprint qui a été declenché.Veuillez consulter la liste de vos tâches afin de savoir vos nouvelles tâches'
                                  });
                                  noti.save()
                                     .then(() => {

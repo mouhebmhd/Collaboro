@@ -35,8 +35,10 @@ document.getElementsByClassName("updateStakeholder")[i].addEventListener("click"
         'url':'/api/stakeholders/update/',
         'method':'put',
         data:{id:event.currentTarget.id,newRole:event.currentTarget.parentNode.parentNode.getElementsByClassName("stakeholderNewRoleName")[0].childNodes[0].value}
-    });
+    }).done(function(response){
         location.reload();
+    })
+        
 
 }); 
 }
