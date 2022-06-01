@@ -83,7 +83,7 @@ route.get('/data/loadDictionary',worker.loadDictionary);
 //this api is used to check if two word are similar
 route.get('/similarities/isSimilarTo/:word1/:word2',worker.isSimilarTo);
 //this api is used to get the list of similarities of a given text 
-route.get('/similarities/getSimilarity/:sentence',worker.getSimilarity);
+route.get('/similarities/getSimilarity/:sentence/:teamStrength/:teamStatus',worker.getSimilarity);
 //this api is used to measure all similarities of the documents of our dataset
 route.get('/similarity/measureAllSimilarities/',worker.measureSimilarities);
 

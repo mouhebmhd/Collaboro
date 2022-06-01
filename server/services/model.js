@@ -223,19 +223,24 @@ function compare( a, b ) {
     }
     return 0;
   }
-function compare1( b, a ) {
-    if ( a.similarity> b.similarity){
-      return -1;
-    }
-    else if ( a.similarity > b.similarity ){
-      return 1;
-    }
-    return 0;
-}
-model.predictWithDecisionTreeKNN=function(objet,k)
+
+model.predictWithDecisionTreeKNN=function(objet,knnParameter)
 {
-let objectToPredict=objet.objectToPredict;
-let dataset=objet.dataset;
+const objectToPredict=objet.objectToPredict;
+var dataset=objet.dataset;
+let datasetCopy=[];
+let stories=require('../../assets/js/stories')
+let maxOnes=[];
+for(var k=0;k<dataset.length;k++)
+{
+datasetCopy.push(dataset[k]);
+}
+dataset=dataset.sort(compare);
+let portion=dataset.slice(0,knnParameter);
+for(var counter=0;counter<knnParameter;counter++)
+{
+maxOnes.push(datasetCopy.indexOf(portion[counter]));
+}
 if(objectToPredict.teamStatus=='local')
 {
     objectToPredict.teamStatus=1;
@@ -246,9 +251,9 @@ else
 }
 for(var i=0;i<dataset.length;i++)
 {
-    if(dataset[i].teamStatus==objectToPredict.teamStatus)
+    if(((dataset[i].teamStatus=='local') && (objectToPredict.teamStatus==1))||((dataset[i].teamStatus=='remote') && (objectToPredict.teamStatus==0)))
     {
-        dataset[i].teamStatus=objectToPredict.teamStatus;
+        dataset[i].teamStatus=1;
     }
     else
     {
@@ -262,14 +267,20 @@ for(var i=0;i<dataset.length;i++)
         }
     }
 }
-  dataset=dataset.sort(compare);
+
+
   let finalResult=[];
-  let binaryRequest=model.convertToBinary((objectToPredict.similarity*10000).toFixed(0)+objectToPredict.teamStatus+objectToPredict.teamStrength);
-  for(var i=0;i<dataset.length;i++)
+  let result=[];
+  let binaryRequest=model.convertToBinary(objectToPredict.teamStatus+objectToPredict.teamStrength);
+  for(var i=0;i<knnParameter;i++)
   {
-    finalResult.push(model.hammingDistance((model.convertToBinary((dataset[i].similarity*10000).toFixed(0)+dataset[i].teamStatus+dataset[i].teamStrength)),binaryRequest))
+    finalResult.push(model.hammingDistance((model.convertToBinary(dataset[i].teamStatus+dataset[i].teamStrength)),binaryRequest));
+    result.push(model.hammingDistance((model.convertToBinary(dataset[i].teamStatus+dataset[i].teamStrength)),binaryRequest));
   }
-  finalResult=finalResult.sort(compare1);
-  return(finalResult);
+  
+  finalResult=finalResult.sort();
+  let minimumDistance=finalResult[0];
+  let toShow={minimumPosition:maxOnes[result.indexOf(minimumDistance)],minimumClass:stories[maxOnes[result.indexOf(minimumDistance)]].storyPoints,minimumOnes:result,maxSimilarity:finalResult[k],minPositions:maxOnes,similarities:dataset,objectToPredict};
+  return(toShow);
 }
 module.exports=model;

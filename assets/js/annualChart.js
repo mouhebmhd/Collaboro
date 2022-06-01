@@ -41,6 +41,23 @@ $.ajax({
     }
     yValues.push(counter);
   }
+  let maxProjects=yValues[0];
+  let minProjects=yValues[0];
+  for(var i=0;i<yValues.length;i++)
+  {
+    if(yValues[i]>maxProjects)
+    {
+      maxProjects=yValues[i];
+    }
+    if(yValues[i]<minProjects)
+    {
+     minProjects=yValues[i];
+    }
+  }
+  document.getElementById('totalProjects').textContent=yValues.reduce((a,b)=>a+b).toString()+' Projets';
+  document.getElementById('maxProjects').textContent=maxProjects +' Projets par mois';
+  document.getElementById('minProjects').textContent=minProjects+' Projets par mois';
+  document.getElementById('avgProjects').textContent=Math.ceil(yValues.reduce((a,b)=>a+b)/5).toString()+' Projets par mois';
   new Chart("myChart", {
     type: "line",
     data: {

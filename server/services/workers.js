@@ -690,7 +690,7 @@ exports.projectByCategory=(req,res)=>{
 	})
 }
 exports.countTasksForUser=(req,res)=>{
-	task.find({affectedTo:req.params.id}).countDocuments()
+	task.find({identifiantUtilisateur:req.params.id}).countDocuments()
 	.then(response=>{
 		res.send({response});
 	})
@@ -788,7 +788,9 @@ exports.loadDictionary=(req,res)=>{
 		res.send(dictionary);
 }
 exports.getSimilarity= (req,res)=>{
+
 	var sentence=req.params.sentence;
+	var teamStrength=parseInt(req.params.teamStrength);
 	var dictionaryVector=[];
 	sentence=model.toLowerCase(sentence);
 	let sentenceVector=model.tokenization(sentence);
@@ -826,7 +828,6 @@ exports.getSimilarity= (req,res)=>{
 	}
 	let maxSimilarity=Math.max.apply(similaritiesVector);
 	let minSimilarity=0;
-	let avgSimilarity=0;
 	for(var i=0;i<similaritiesVector.length;i++)
 	{
 		if((similaritiesVector[i]>maxSimilarity) && (similaritiesVector[i]!=Infinity))
@@ -838,9 +839,8 @@ exports.getSimilarity= (req,res)=>{
 			minSimilarity=similaritiesVector[i];
 		}
 	}
-	let teamStatus='local';
-	let teamStrength=6;
-		let objectToPredict={similarity:maxSimilarity,teamStrength:5,teamStatus:'local'};
+	let teamStatus=req.params.teamStatus;
+		let objectToPredict={similarity:maxSimilarity,teamStrength,teamStatus};
 		let dataset=[];
 		for(var i=0;i<stories.length;i++)
 		{

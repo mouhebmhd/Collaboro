@@ -1,8 +1,26 @@
+
 var yValues=[];
 var modelResult=0;
+function WordCount(str) {
+    return str.split(' ').length;
+  }
 function estimateStoryPoints()
 {
     var description=document.getElementById('usDescription').value;
+    var teamStrength=document.getElementById('teamStrength').value;
+    var teamStatusRemote=document.getElementById('remote');
+    var teamStatusLocal=document.getElementById('local');
+    let teamStatus;
+    var response;
+    if(teamStatusRemote.checked)
+    {
+         teamStatus='local';
+    }
+    else
+    {
+         teamStatus='remote';
+    }
+    teamStrength=parseInt(teamStrength);
     while(description.charAt(description.length-1)==' ')
     {
         description=description.substr(0,description.length-2)
@@ -16,22 +34,53 @@ function estimateStoryPoints()
         description=description.replace('  ',' ');
     }
     $.ajax({
-        'url':'http://localhost:8080/similarities/getSimilarities/'+$.param({sentence:description.toString()}),
-        'method':'GET'
+        'url':'http://localhost:8080/similarities/getSimilarity/'+description.toString()+'/'+teamStrength.toString()+'/'+teamStatus.toString(),
+        'method':'GET',
+        
     })
-    .done(function(response){
-        alert(response);
-    })
-          /*  var xValues = [];
-        for(var i=1;i<=487;i++)
+    .done(function(respo){
+        document.getElementById('charCount').textContent=description.length;
+        document.getElementById('wordCount').textContent=WordCount(description);
+        document.getElementById('dataSetSize').textContent=respo.similarities.length;
+        response=respo;
+        var xValues = [];
+        var yValues = [];
+        let maxSimilarity=response.similarities[0].similarity;
+        let minSimilarity=response.similarities[0].similarity;
+        let averageSimilarity=0;
+        var yValues1 = [];
+        for(var i=0;i<=response.similarities.length;i++)
         {
             xValues.push(i);
         }
-        for(var i=0;i<486;i++)
+        for(var counter=0;counter<respo.similarities.length;counter++)
         {
-            yValues[i]*=100;
+            if(respo.similarities[counter].similarity>maxSimilarity)
+            {
+                maxSimilarity=respo.similarities[counter].similarity;
+            }
+            if (respo.similarities[counter].similarity<minSimilarity)
+            {
+                minSimilarity=respo.similarities[counter].similarity;
+            }
+            averageSimilarity+=respo.similarities[counter].similarity;
         }
-        new Chart("myChart1", {
+        document.getElementsByClassName('maxSimilarity')[0].textContent=((maxSimilarity*100).toFixed(2)).toString()+'%';
+        document.getElementsByClassName('minSimilarity')[0].textContent=((minSimilarity*100).toFixed(2)).toString()+'%';
+        document.getElementById('similarityAverage').textContent=(((averageSimilarity/respo.similarities.length)*100).toFixed(2)).toString()+'%';
+        document.getElementsByClassName('result')[0].textContent="Story de classe "+respo.minimumClass;
+        for(var i=0;i<response.similarities.length;i++)
+        {
+            if(response.minimumOnes.indexOf(i)==-1)
+            {
+                yValues[i]=response.similarities[i].similarity;
+            }
+            else
+            {
+                yValues1.push(response.similarities[i].similarity);
+            }
+        }
+                 new Chart("myChart3", {
             type: "scatter",
             data: {
             labels: xValues,
@@ -44,12 +93,12 @@ function estimateStoryPoints()
                 data: yValues
             },
             {
-                label:"Similarité de la nouvelle description",
+                label:"Les stories les plus proches selon la similarité",
                     fill: false,
                     lineTension: 0,
                     backgroundColor: "#02D1A6",
                     borderColor: "rgba(0,0,255,0.1)",
-                    data: [modelResult]            
+                    data: yValues1           
                 }
             ]
             },
@@ -59,5 +108,6 @@ function estimateStoryPoints()
             maintainAspectRatio: false,
           
             }
-        });*/
+        });
+    });
 }
