@@ -108,7 +108,7 @@ function estimateStoryPoints()
                     data: yValues1           
                 },
                 {
-                    label:"Emplacement du stories Fournie",
+                    label:"Emplacement du story Fournie",
                         fill: false,
                         lineTension: 0,
                         backgroundColor: "#00B5C1",
